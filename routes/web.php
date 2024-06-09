@@ -8,3 +8,4 @@ Route::get('/', function () {
 });
 
 Route::get('mqtt',[ServiceController::class,'index']);
+Route::post('data/save',[ServiceController::class,'save']);
