@@ -15,6 +15,8 @@ class ServiceController extends Controller
         return view('mqtt.index');
     }
     public function save(Request $request){ 
+        ph
+        temp
         $data = Data::create([
             'ph' => $request->ph,
             'temperatura' => $request->temperatura,

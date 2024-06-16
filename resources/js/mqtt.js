@@ -3,7 +3,7 @@ import "flowbite";
 import "flowbite/dist/flowbite.min.js";
 import ApexCharts from "apexcharts";
 import axios from "axios";
-
+//import './pruebas';
 
 let globalPhData = [];
 let globalTemperaturaData = [];
@@ -201,23 +201,39 @@ const getMainChartOptions = () => {
 };
 
 if (document.getElementById("main-chart")) {
-
     fetchData().then(() => {
         processData();
-    });
+        const chart = new ApexCharts(
+            document.getElementById("main-chart"),
+            getMainChartOptions()
+        );
+        chart.render();
 
-    
-    const chart = new ApexCharts(
-        document.getElementById("main-chart"),
-        getMainChartOptions()
-    );
-    chart.render();
-
-    // init again when toggling dark mode
-    document.addEventListener("dark-mode", function () {
-        chart.updateOptions(getMainChartOptions());
+        // init again when toggling dark mode
+        document.addEventListener("dark-mode", function () {
+            chart.updateOptions(getMainChartOptions());
+        });
     });
 }
+
+// if (document.getElementById("main-chart")) {
+
+//     fetchData().then(() => {
+//         processData();
+//     });
+
+    
+//     const chart = new ApexCharts(
+//         document.getElementById("main-chart"),
+//         getMainChartOptions()
+//     );
+//     chart.render();
+
+//     // init again when toggling dark mode
+//     document.addEventListener("dark-mode", function () {
+//         chart.updateOptions(getMainChartOptions());
+//     });
+// }
 
 // Support Chart
 
@@ -837,8 +853,19 @@ client.on('message',async  function (topic, message) {
     })
     .then(function (response) {
         console.log(response);
-        // fetchData();
-        // processData();
+        fetchData().then(() => {
+            processData();
+            const chart = new ApexCharts(
+                document.getElementById("main-chart"),
+                getMainChartOptions()
+            );
+            chart.render();
+    
+            // init again when toggling dark mode
+            document.addEventListener("dark-mode", function () {
+                chart.updateOptions(getMainChartOptions());
+            });
+        });
     })
     .catch(function (error) {
     console.log(error);
