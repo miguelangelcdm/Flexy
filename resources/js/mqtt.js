@@ -4,48 +4,9 @@ import "flowbite/dist/flowbite.min.js";
 import ApexCharts from "apexcharts";
 import axios from "axios";
 
-
-let globalPhData = [];
-let globalTemperaturaData = [];
-let globalOxigenoDisueltoData = [];
-let globalConductividadData = [];
-
-function fetchData() {
-    //return 
-    return axios.get('/data/getAll')
-        .then(function (response) {
-            console.log('Datos recibidos:', response.data);
-            // Almacenar los datos globalmente
-            globalPhData = response.data.ph;
-            globalTemperaturaData = response.data.temperatura;
-            globalOxigenoDisueltoData = response.data.oxigenoDisuelto;
-            globalConductividadData = response.data.conductividad;
-            //return response.data;  // Devuelve directamente los datos de la respuesta.
-        })
-        .catch(function (error) {
-            console.error('Error al obtener los datos:', error);
-            throw error;  // Relanza el error para poder capturarlo más adelante si es necesario.
-        });
-}
-
-function processData() {
-    // Aquí puedes acceder a los datos globales
-    console.log('pH data:', globalPhData);
-    console.log('Temperatura data:', globalTemperaturaData);
-    console.log('Oxígeno Disuelto data:', globalOxigenoDisueltoData);
-    console.log('Conductividad data:', globalConductividadData);
-
-    // Realiza el procesamiento que necesites con los datos
-    // Por ejemplo, calcular el promedio del pH
-    const phPromedio = globalPhData.reduce((sum, value) => sum + value, 0) / globalPhData.length;
-    console.log('Promedio del pH:', phPromedio);
-}
 // Main Chart
-const getMainChartOptions = () => {
-    
-    
-
-    let mainChartColors = {};
+// const getMainChartOptions = () => {
+//     let mainChartColors = {};
 
 //     if (document.documentElement.classList.contains("dark")) {
 //         mainChartColors = {
@@ -63,236 +24,15 @@ const getMainChartOptions = () => {
 //         };
 //     }
 
-    return {
-        chart: {
-            height: 460,
-            type: "area",
-            fontFamily: "Inter, sans-serif",
-            foreColor: mainChartColors.labelColor,
-            toolbar: {
-                show: false,
-            },
-        },
-        fill: {
-            type: "gradient",
-            gradient: {
-                enabled: true,
-                opacityFrom: mainChartColors.opacityFrom,
-                opacityTo: mainChartColors.opacityTo,
-            },
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        tooltip: {
-            style: {
-                fontSize: "14px",
-                fontFamily: "Inter, sans-serif",
-            },
-        },
-        grid: {
-            show: true,
-            borderColor: mainChartColors.borderColor,
-            strokeDashArray: 1,
-            padding: {
-                left: 35,
-                bottom: 15,
-            },
-        },
-        series: [
-            {
-                name: "Ph",
-                data: globalPhData,
-                color: "#1A56DB",
-            },
-            {
-                name: "Temperatura",
-                data: globalTemperaturaData,
-                color: "#FDBA8C",
-            },
-            {
-                name: "Oxigeno Disuelto",
-                data: globalOxigenoDisueltoData,
-                color: "#1A56DB",
-            },
-            {
-                name: "Conductividad",
-                data: globalConductividadData,
-                color: "#FDBA8C",
-            },
-        ],
-        markers: {
-            size: 5,
-            strokeColors: "#ffffff",
-            hover: {
-                size: undefined,
-                sizeOffset: 3,
-            },
-        },
-        xaxis: {
-            categories: [
-                "01 Feb",
-                "02 Feb",
-                "03 Feb",
-                "04 Feb",
-                "05 Feb",
-                "06 Feb",
-                "07 Feb",
-            ],
-            labels: {
-                style: {
-                    colors: [mainChartColors.labelColor],
-                    fontSize: "14px",
-                    fontWeight: 500,
-                },
-            },
-            axisBorder: {
-                color: mainChartColors.borderColor,
-            },
-            axisTicks: {
-                color: mainChartColors.borderColor,
-            },
-            crosshairs: {
-                show: true,
-                position: "back",
-                stroke: {
-                    color: mainChartColors.borderColor,
-                    width: 1,
-                    dashArray: 10,
-                },
-            },
-        },
-        yaxis: {
-            labels: {
-                style: {
-                    colors: [mainChartColors.labelColor],
-                    fontSize: "14px",
-                    fontWeight: 500,
-                },
-                formatter: function (value) {
-                    return "$" + value;
-                },
-            },
-        },
-        legend: {
-            fontSize: "14px",
-            fontWeight: 500,
-            fontFamily: "Inter, sans-serif",
-            labels: {
-                colors: [mainChartColors.labelColor],
-            },
-            itemMargin: {
-                horizontal: 10,
-            },
-        },
-        responsive: [
-            {
-                breakpoint: 1024,
-                options: {
-                    xaxis: {
-                        labels: {
-                            show: false,
-                        },
-                    },
-                },
-            },
-        ],
-    };
-};
-
-if (document.getElementById("main-chart")) {
-
-    fetchData().then(() => {
-        processData();
-    });
-
-    
-    const chart = new ApexCharts(
-        document.getElementById("main-chart"),
-        getMainChartOptions()
-    );
-    chart.render();
-
-//     // init again when toggling dark mode
-//     document.addEventListener("dark-mode", function () {
-//         chart.updateOptions(getMainChartOptions());
-//     });
-// }
-
-// const getMainChartOptions = () => {
-//     let mainChartColors = {};
-
-//     if (document.documentElement.classList.contains("dark")) {
-//         mainChartColors = {
-//             borderColor: "#374151",
-//             labelColor: "#9CA3AF",
-//             opacityFrom: 0.2,
-//             opacityTo: 0.8,
-//         };
-//     } else {
-//         mainChartColors = {
-//             borderColor: "#F3F4F6",
-//             labelColor: "#6B7280",
-//             opacityFrom: 0.2,
-//             opacityTo: 0.8,
-//         };
-//     }
-
 //     return {
 //         chart: {
 //             height: 460,
-//             type: "line", // Changed to line for better visibility
+//             type: "area",
 //             fontFamily: "Inter, sans-serif",
 //             foreColor: mainChartColors.labelColor,
-//             animations: {
-//                 enabled: true,
-//                 easing: "linear",
-//                 dynamicAnimation: {
-//                     speed: 1000,
-//                 },
-//             },
 //             toolbar: {
 //                 show: false,
 //             },
-//             events: {
-//                 mounted: (chartContext, config) => {
-//                     const maxDataPoints = 15; // Maximum number of data points visible at any time
-//                     setInterval(() => {
-//                         const newData =
-//                             Math.floor(Math.random() * (7000 - 6000 + 1)) +
-//                             6000;
-
-//                         // Remove the first data point if we exceed maxDataPoints
-//                         if (
-//                             config.config.series[0].data.length >= maxDataPoints
-//                         ) {
-//                             config.config.series[0].data.shift();
-//                             config.config.xaxis.categories.shift();
-//                         }
-
-//                         const newDate = new Date();
-//                         newDate.setSeconds(
-//                             newDate.getSeconds() +
-//                                 config.config.series[0].data.length
-//                         );
-//                         const dateString = `${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`;
-
-//                         // Append new data
-//                         chartContext.appendData([{ data: [newData] }]);
-//                         config.config.xaxis.categories.push(dateString);
-
-//                         // Update categories smoothly
-//                         chartContext.updateOptions({
-//                             xaxis: {
-//                                 categories: config.config.xaxis.categories,
-//                             },
-//                         });
-//                     }, 1000); // Update every second
-//                 },
-//             },
-//         },
-//         stroke: {
-//             curve: "smooth",
 //         },
 //         fill: {
 //             type: "gradient",
@@ -303,12 +43,9 @@ if (document.getElementById("main-chart")) {
 //             },
 //         },
 //         dataLabels: {
-//             enabled: true,
+//             enabled: false,
 //         },
 //         tooltip: {
-//             x: {
-//                 format: "HH:mm:ss", // Show time on hover
-//             },
 //             style: {
 //                 fontSize: "14px",
 //                 fontFamily: "Inter, sans-serif",
@@ -325,9 +62,14 @@ if (document.getElementById("main-chart")) {
 //         },
 //         series: [
 //             {
-//                 name: "Water Quality Index",
+//                 name: "Revenue",
 //                 data: [6356, 6218, 6156, 6526, 6356, 6256, 6056],
 //                 color: "#1A56DB",
+//             },
+//             {
+//                 name: "Revenue (previous period)",
+//                 data: [6556, 6725, 6424, 6356, 6586, 6756, 6616],
+//                 color: "#FDBA8C",
 //             },
 //         ],
 //         markers: {
@@ -349,16 +91,26 @@ if (document.getElementById("main-chart")) {
 //                 "07 Feb",
 //             ],
 //             labels: {
-//                 show: false,
+//                 style: {
+//                     colors: [mainChartColors.labelColor],
+//                     fontSize: "14px",
+//                     fontWeight: 500,
+//                 },
 //             },
 //             axisBorder: {
-//                 show: false,
+//                 color: mainChartColors.borderColor,
 //             },
 //             axisTicks: {
-//                 show: false,
+//                 color: mainChartColors.borderColor,
 //             },
-//             tooltip: {
-//                 enabled: true,
+//             crosshairs: {
+//                 show: true,
+//                 position: "back",
+//                 stroke: {
+//                     color: mainChartColors.borderColor,
+//                     width: 1,
+//                     dashArray: 10,
+//                 },
 //             },
 //         },
 //         yaxis: {
@@ -369,7 +121,7 @@ if (document.getElementById("main-chart")) {
 //                     fontWeight: 500,
 //                 },
 //                 formatter: function (value) {
-//                     return `$${value.toFixed(2)}`; // Display the value as currency
+//                     return "$" + value;
 //                 },
 //             },
 //         },
@@ -412,218 +164,198 @@ if (document.getElementById("main-chart")) {
 //     });
 // }
 
-// const getMainChartOptions = (seriesData, categoriesData) => {
-//     let mainChartColors = {};
+const getMainChartOptions = () => {
+    let mainChartColors = {};
 
-//     if (document.documentElement.classList.contains("dark")) {
-//         mainChartColors = {
-//             borderColor: "#374151",
-//             labelColor: "#9CA3AF",
-//             opacityFrom: 0.2,
-//             opacityTo: 0.8,
-//         };
-//     } else {
-//         mainChartColors = {
-//             borderColor: "#F3F4F6",
-//             labelColor: "#6B7280",
-//             opacityFrom: 0.2,
-//             opacityTo: 0.8,
-//         };
-//     }
+    if (document.documentElement.classList.contains("dark")) {
+        mainChartColors = {
+            borderColor: "#374151",
+            labelColor: "#9CA3AF",
+            opacityFrom: 0.2,
+            opacityTo: 0.8,
+        };
+    } else {
+        mainChartColors = {
+            borderColor: "#F3F4F6",
+            labelColor: "#6B7280",
+            opacityFrom: 0.2,
+            opacityTo: 0.8,
+        };
+    }
 
-//     return {
-//         chart: {
-//             height: 460,
-//             type: "line",
-//             fontFamily: "Inter, sans-serif",
-//             foreColor: mainChartColors.labelColor,
-//             animations: {
-//                 enabled: true,
-//                 easing: "easeinout",
-//                 dynamicAnimation: {
-//                     speed: 1000,
-//                 },
-//             },
-//             toolbar: {
-//                 show: false,
-//             },
-//         },
-//         stroke: {
-//             curve: "smooth",
-//         },
-//         fill: {
-//             type: "gradient",
-//             gradient: {
-//                 enabled: true,
-//                 opacityFrom: mainChartColors.opacityFrom,
-//                 opacityTo: mainChartColors.opacityTo,
-//             },
-//         },
-//         dataLabels: {
-//             enabled: true,
-//         },
-//         tooltip: {
-//             x: {
-//                 format: "HH:mm:ss", // Show time on hover
-//             },
-//             style: {
-//                 fontSize: "14px",
-//                 fontFamily: "Inter, sans-serif",
-//             },
-//         },
-//         grid: {
-//             show: true,
-//             borderColor: mainChartColors.borderColor,
-//             strokeDashArray: 1,
-//             padding: {
-//                 left: 35,
-//                 bottom: 15,
-//             },
-//         },
-//         series: [
-//             {
-//                 name: "Water Quality pH",
-//                 data: seriesData,
-//                 color: "#1A56DB",
-//             },
-//         ],
-//         markers: {
-//             size: 5,
-//             strokeColors: "#ffffff",
-//             hover: {
-//                 size: undefined,
-//                 sizeOffset: 3,
-//             },
-//         },
-//         xaxis: {
-//             categories: categoriesData,
-//             labels: {
-//                 show: false,
-//             },
-//             axisBorder: {
-//                 show: false,
-//             },
-//             axisTicks: {
-//                 show: false,
-//             },
-//             tooltip: {
-//                 enabled: true,
-//             },
-//         },
-//         yaxis: {
-//             labels: {
-//                 style: {
-//                     colors: [mainChartColors.labelColor],
-//                     fontSize: "14px",
-//                     fontWeight: 500,
-//                 },
-//                 formatter: function (value) {
-//                     return `${value.toFixed(2)}`; // Display the value as pH
-//                 },
-//             },
-//         },
-//         legend: {
-//             fontSize: "14px",
-//             fontWeight: 500,
-//             fontFamily: "Inter, sans-serif",
-//             labels: {
-//                 colors: [mainChartColors.labelColor],
-//             },
-//             itemMargin: {
-//                 horizontal: 10,
-//             },
-//         },
-//         responsive: [
-//             {
-//                 breakpoint: 1024,
-//                 options: {
-//                     xaxis: {
-//                         labels: {
-//                             show: false,
-//                         },
-//                     },
-//                 },
-//             },
-//         ],
-//     };
-// };
+    return {
+        chart: {
+            height: 460,
+            type: "line", // Changed to line for better visibility
+            fontFamily: "Inter, sans-serif",
+            foreColor: mainChartColors.labelColor,
+            animations: {
+                enabled: true,
+                easing: "linear",
+                dynamicAnimation: {
+                    speed: 1000,
+                },
+            },
+            toolbar: {
+                show: false,
+            },
+            events: {
+                mounted: (chartContext, config) => {
+                    const maxDataPoints = 15; // Maximum number of data points visible at any time
+                    setInterval(() => {
+                        const newData =
+                            Math.floor(Math.random() * (7000 - 6000 + 1)) +
+                            6000;
 
-// let seriesData = [7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6]; // Initial data
-// let categoriesData = [
-//     "01 Feb",
-//     "02 Feb",
-//     "03 Feb",
-//     "04 Feb",
-//     "05 Feb",
-//     "06 Feb",
-//     "07 Feb",
-// ]; // Initial categories
+                        // Remove the first data point if we exceed maxDataPoints
+                        if (
+                            config.config.series[0].data.length >= maxDataPoints
+                        ) {
+                            config.config.series[0].data.shift();
+                            config.config.xaxis.categories.shift();
+                        }
 
-// const renderChart = () => {
-//     if (document.getElementById("main-chart")) {
-//         const chart = new ApexCharts(
-//             document.getElementById("main-chart"),
-//             getMainChartOptions(seriesData, categoriesData)
-//         );
-//         chart.render();
+                        const newDate = new Date();
+                        newDate.setSeconds(
+                            newDate.getSeconds() +
+                                config.config.series[0].data.length
+                        );
+                        const dateString = `${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`;
 
-//         // init again when toggling dark mode
-//         document.addEventListener("dark-mode", function () {
-//             chart.updateOptions(
-//                 getMainChartOptions(seriesData, categoriesData)
-//             );
-//         });
-//     }
-// };
+                        // Append new data
+                        chartContext.appendData([{ data: [newData] }]);
+                        config.config.xaxis.categories.push(dateString);
 
-// renderChart();
+                        // Update categories smoothly
+                        chartContext.updateOptions({
+                            xaxis: {
+                                categories: config.config.xaxis.categories,
+                            },
+                        });
+                    }, 1000); // Update every second
+                },
+            },
+        },
+        stroke: {
+            curve: "smooth",
+        },
+        fill: {
+            type: "gradient",
+            gradient: {
+                enabled: true,
+                opacityFrom: mainChartColors.opacityFrom,
+                opacityTo: mainChartColors.opacityTo,
+            },
+        },
+        dataLabels: {
+            enabled: true,
+        },
+        tooltip: {
+            x: {
+                format: "HH:mm:ss", // Show time on hover
+            },
+            style: {
+                fontSize: "14px",
+                fontFamily: "Inter, sans-serif",
+            },
+        },
+        grid: {
+            show: true,
+            borderColor: mainChartColors.borderColor,
+            strokeDashArray: 1,
+            padding: {
+                left: 35,
+                bottom: 15,
+            },
+        },
+        series: [
+            {
+                name: "Water Quality Index",
+                data: [6356, 6218, 6156, 6526, 6356, 6256, 6056],
+                color: "#1A56DB",
+            },
+        ],
+        markers: {
+            size: 5,
+            strokeColors: "#ffffff",
+            hover: {
+                size: undefined,
+                sizeOffset: 3,
+            },
+        },
+        xaxis: {
+            categories: [
+                "01 Feb",
+                "02 Feb",
+                "03 Feb",
+                "04 Feb",
+                "05 Feb",
+                "06 Feb",
+                "07 Feb",
+            ],
+            labels: {
+                show: false,
+            },
+            axisBorder: {
+                show: false,
+            },
+            axisTicks: {
+                show: false,
+            },
+            tooltip: {
+                enabled: true,
+            },
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    colors: [mainChartColors.labelColor],
+                    fontSize: "14px",
+                    fontWeight: 500,
+                },
+                formatter: function (value) {
+                    return `$${value.toFixed(2)}`; // Display the value as currency
+                },
+            },
+        },
+        legend: {
+            fontSize: "14px",
+            fontWeight: 500,
+            fontFamily: "Inter, sans-serif",
+            labels: {
+                colors: [mainChartColors.labelColor],
+            },
+            itemMargin: {
+                horizontal: 10,
+            },
+        },
+        responsive: [
+            {
+                breakpoint: 1024,
+                options: {
+                    xaxis: {
+                        labels: {
+                            show: false,
+                        },
+                    },
+                },
+            },
+        ],
+    };
+};
 
-// // Conexión al broker MQTT
-// const client = mqtt.connect("wss://broker.emqx.io:8084/mqtt");
+if (document.getElementById("main-chart")) {
+    const chart = new ApexCharts(
+        document.getElementById("main-chart"),
+        getMainChartOptions()
+    );
+    chart.render();
 
-// client.on("connect", function () {
-//     console.log("Conectado al broker MQTT");
-//     client.subscribe("salida/01", function (err) {
-//         if (!err) {
-//             console.log("Suscrito al tema salida/01");
-//         } else {
-//             console.error("Error al suscribirse al tema", err);
-//         }
-//     });
-// });
-
-// client.on("message", function (topic, message) {
-//     // Mensaje recibido
-//     console.log("Mensaje recibido:", message.toString());
-
-//     let data;
-//     try {
-//         data = JSON.parse(message.toString());
-//     } catch (error) {
-//         console.error("Error al parsear el mensaje JSON:", error);
-//         return;
-//     }
-
-//     const newData = data.Data.Ph;
-//     const newDate = new Date();
-//     const dateString = `${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`;
-
-//     // Append new data
-//     seriesData.push(newData);
-//     categoriesData.push(dateString);
-
-//     // Ensure we only keep the last 10 data points
-//     if (seriesData.length > 10) {
-//         seriesData.shift();
-//         categoriesData.shift();
-//     }
-
-//     // Destroy and re-render the chart
-//     document.getElementById("main-chart").innerHTML = "";
-//     renderChart();
-// });
-
-
+    // init again when toggling dark mode
+    document.addEventListener("dark-mode", function () {
+        chart.updateOptions(getMainChartOptions());
+    });
+}
 
 
 // const getMainChartOptions = (seriesData, categoriesData) => {
@@ -1418,7 +1150,7 @@ if (document.getElementById("traffic-by-device")) {
 // }
 
 // Conexión al broker MQTT
-// const client = mqtt.connect('wss://broker.emqx.io:8084/mqtt');
+const client = mqtt.connect('wss://broker.emqx.io:8084/mqtt');
 
 client.on('connect', function () {
     console.log('Conectado al broker MQTT');
@@ -1444,9 +1176,7 @@ client.on('message',async  function (topic, message) {
         oxigeno_disuelto: data.Data.OxigenoDisuelto
     })
     .then(function (response) {
-        console.log(response);
-        // fetchData();
-        // processData();
+    console.log(response);
     })
     .catch(function (error) {
     console.log(error);
@@ -1475,8 +1205,6 @@ client.on('message',async  function (topic, message) {
     } else {
         overflowDiv.style.overflowY = "hidden";
     }
-
-    
 
 });
 
