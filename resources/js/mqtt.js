@@ -4,8 +4,47 @@ import "flowbite/dist/flowbite.min.js";
 import ApexCharts from "apexcharts";
 import axios from "axios";
 
+
+let globalPhData = [];
+let globalTemperaturaData = [];
+let globalOxigenoDisueltoData = [];
+let globalConductividadData = [];
+
+function fetchData() {
+    //return 
+    return axios.get('/data/getAll')
+        .then(function (response) {
+            console.log('Datos recibidos:', response.data);
+            // Almacenar los datos globalmente
+            globalPhData = response.data.ph;
+            globalTemperaturaData = response.data.temperatura;
+            globalOxigenoDisueltoData = response.data.oxigenoDisuelto;
+            globalConductividadData = response.data.conductividad;
+            //return response.data;  // Devuelve directamente los datos de la respuesta.
+        })
+        .catch(function (error) {
+            console.error('Error al obtener los datos:', error);
+            throw error;  // Relanza el error para poder capturarlo más adelante si es necesario.
+        });
+}
+
+function processData() {
+    // Aquí puedes acceder a los datos globales
+    console.log('pH data:', globalPhData);
+    console.log('Temperatura data:', globalTemperaturaData);
+    console.log('Oxígeno Disuelto data:', globalOxigenoDisueltoData);
+    console.log('Conductividad data:', globalConductividadData);
+
+    // Realiza el procesamiento que necesites con los datos
+    // Por ejemplo, calcular el promedio del pH
+    const phPromedio = globalPhData.reduce((sum, value) => sum + value, 0) / globalPhData.length;
+    console.log('Promedio del pH:', phPromedio);
+}
 // Main Chart
 const getMainChartOptions = () => {
+    
+    
+
     let mainChartColors = {};
 
     if (document.documentElement.classList.contains("dark")) {
@@ -62,13 +101,23 @@ const getMainChartOptions = () => {
         },
         series: [
             {
-                name: "Revenue",
-                data: [6356, 6218, 6156, 6526, 6356, 6256, 6056],
+                name: "Ph",
+                data: globalPhData,
                 color: "#1A56DB",
             },
             {
-                name: "Revenue (previous period)",
-                data: [6556, 6725, 6424, 6356, 6586, 6756, 6616],
+                name: "Temperatura",
+                data: globalTemperaturaData,
+                color: "#FDBA8C",
+            },
+            {
+                name: "Oxigeno Disuelto",
+                data: globalOxigenoDisueltoData,
+                color: "#1A56DB",
+            },
+            {
+                name: "Conductividad",
+                data: globalConductividadData,
                 color: "#FDBA8C",
             },
         ],
@@ -152,6 +201,12 @@ const getMainChartOptions = () => {
 };
 
 if (document.getElementById("main-chart")) {
+
+    fetchData().then(() => {
+        processData();
+    });
+
+    
     const chart = new ApexCharts(
         document.getElementById("main-chart"),
         getMainChartOptions()
@@ -781,7 +836,9 @@ client.on('message',async  function (topic, message) {
         oxigeno_disuelto: data.Data.OxigenoDisuelto
     })
     .then(function (response) {
-    console.log(response);
+        console.log(response);
+        // fetchData();
+        // processData();
     })
     .catch(function (error) {
     console.log(error);
@@ -810,6 +867,8 @@ client.on('message',async  function (topic, message) {
     } else {
         overflowDiv.style.overflowY = "hidden";
     }
+
+    
 
 });
 
