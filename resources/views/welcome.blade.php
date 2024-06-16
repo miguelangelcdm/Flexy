@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Flexy</title>
+  <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.bunny.net">
@@ -20,7 +21,7 @@
           <!-- navbar -->
           <nav class="navbar navbar-expand-lg navbar-light px-sm-0">
             <a class="" href="../../index.html" >
-              <img class="logo" src="{{ asset('img/flexy.png') }}" alt="logo" style="height: auto; width: 100px" />
+              <img class="logo" src="{{ asset('img/logo_flexy.png') }}" alt="logo" style="height: auto; width: 100px" />
 
             </a>
             <button class="navbar-toggler menu ripplemenu" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

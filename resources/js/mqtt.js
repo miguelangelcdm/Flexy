@@ -2,6 +2,7 @@ import mqtt from "mqtt"; // import namespace "mqtt"
 import "flowbite";
 import "flowbite/dist/flowbite.min.js";
 import ApexCharts from "apexcharts";
+import axios from "axios";
 
 // Main Chart
 const getMainChartOptions = () => {
@@ -765,11 +766,27 @@ client.on('connect', function () {
     });
 });
 
-client.on('message', function (topic, message) {
+client.on('message',async  function (topic, message) {
     // Mensaje recibido
     console.log("Mensaje recibido:", message.toString());
     const data = JSON.parse(message.toString());
 
+    axios.post('/data/save', {
+        dispositivo: data.Dispositivo,
+        id: data.Id,
+        timestamp: data.Timestamp,
+        ph: data.Data.Ph,
+        temperatura: data.Data.Temperatura,
+        conductividad: data.Data.Conductividad,
+        oxigeno_disuelto: data.Data.OxigenoDisuelto
+    })
+    .then(function (response) {
+    console.log(response);
+    })
+    .catch(function (error) {
+    console.log(error);
+    });    
+    
     const tableBody = document.getElementById("data-body");
 
     // Crear una nueva fila
@@ -793,6 +810,7 @@ client.on('message', function (topic, message) {
     } else {
         overflowDiv.style.overflowY = "hidden";
     }
+
 });
 
 // Tema oscuro
