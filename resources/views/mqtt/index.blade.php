@@ -1,24 +1,18 @@
 <x-safe-layout>
-  <div class="px-4 pt-6 2xl:px-0">
+  <div class="flex flex-col gap-4 px-4 pt-6 2xl:px-0">
     <div class="grid gap-4 2xl:grid-cols-2 xl:grid-cols-2">
-        {{-- Main Chart --}}
+        {{-- Ph Chart --}}
       <div class="p-4 bg-white rounded-lg shadow-sm dark:bg-gray-800 sm:p-6">
         <div class="flex justify-between mb-5">
           <div>
             <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">Medición de pH</h5>
             <p class="text-base font-normal text-gray-500 dark:text-gray-400">Historico</p>
           </div>
-          <div class="flex flex-col justify-end items-end px-2.5 py-0.5 text-base font-semibold text-center text-green-500">
-            <div class="flex justify-center items-center">
-              23%
-              <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
-              </svg>
-            </div>
-            <p class="text-base font-normal text-gray-500 dark:text-gray-400">En relacion a la última semana</p>
+          <div class="flex flex-col justify-center items-center px-2.5 py-0.5 text-base font-semibold text-center text-green-500">
+            <img src="{{ asset('build/assets/img/ph.svg') }}" alt="" class="w-10 h-10">
           </div>
         </div>
-        <div id="main-chart" style="min-height: 435px;"></div>
+        <div id="ph-chart" style="min-height: 435px;"></div>
         <div class="grid grid-cols-1 justify-between items-center mt-5 border-t border-gray-200 dark:border-gray-700">
           <div class="flex justify-between items-center pt-5">
             <!-- Button -->
@@ -57,40 +51,24 @@
           </div>
         </div>
       </div>
-      {{-- Support Chart --}}
+      {{-- TEMPERATURE Chart --}}
       <div class="p-4 bg-white rounded-lg shadow-sm dark:bg-gray-800 sm:p-6">
-        <div class="flex justify-between pb-3 border-b border-gray-200">
-          <dl>
-            <dt class="pb-1 text-base font-normal text-gray-500 dark:text-white">Profit</dt>
-            <dd class="text-3xl font-bold leading-none text-gray-900 dark:text-white">$5,405</dd>
-          </dl>
+        <div class="flex justify-between mb-5">
           <div>
-            <span class="inline-flex items-center px-2.5 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-md">
-              <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
-              </svg>
-              Profit rate 23.5%
-            </span>
+            <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">Medición de Temperatura</h5>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">Historico</p>
           </div>
-        </div>
+          <div class="flex flex-col justify-center items-center px-2.5 py-0.5 text-base font-semibold text-center text-green-500">
+            <img src="{{ asset('build/assets/img/Termometer.svg') }}" alt="" class="w-10 h-10">
+          </div>
 
-        <div class="grid grid-cols-2 py-3">
-          <dl>
-            <dt class="pb-1 text-base font-normal text-gray-500">Income</dt>
-            <dd class="text-xl font-bold leading-none text-green-500">$23,635</dd>
-          </dl>
-          <dl>
-            <dt class="pb-1 text-base font-normal text-gray-500">Expense</dt>
-            <dd class="text-xl font-bold leading-none text-red-600">-$18,230</dd>
-          </dl>
         </div>
-
-        <div id="bar-chart"></div>
-        <div class="grid grid-cols-1 justify-between items-center border-t border-gray-200">
+        <div id="temp-chart" style="min-height: 435px;"></div>
+        <div class="grid grid-cols-1 justify-between items-center mt-5 border-t border-gray-200 dark:border-gray-700">
           <div class="flex justify-between items-center pt-5">
             <!-- Button -->
             <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom" class="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900" type="button">
-              Last 6 months
+              Last 7 days
               <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
               </svg>
@@ -113,25 +91,122 @@
                 <li>
                   <a href="#" class="block px-4 py-2 hover:bg-gray-100">Last 90 days</a>
                 </li>
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-100">Last 6 months</a>
-                </li>
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-100">Last year</a>
-                </li>
               </ul>
             </div>
             <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-semibold text-blue-600 uppercase rounded-lg hover:text-blue-700 hover:bg-gray-100">
-              Revenue Report
+              Sales Report
               <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
               </svg>
             </a>
           </div>
         </div>
-
       </div>
     </div>
+    <div class="grid gap-4 2xl:grid-cols-2 xl:grid-cols-2">
+      {{-- OD Chart --}}
+      <div class="p-4 bg-white rounded-lg shadow-sm dark:bg-gray-800 sm:p-6">
+        <div class="flex justify-between mb-5">
+          <div>
+            <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">Medición de Oxígeno disuelto</h5>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">Historico</p>
+          </div>
+          <div class="flex flex-col justify-center items-center px-2.5 py-0.5 text-base font-semibold text-center text-green-500">
+            <img src="{{ asset('build/assets/img/OD.svg') }}" alt="" class="w-10 h-10">
+          </div>
+
+        </div>
+        <div id="od-chart" style="min-height: 435px;"></div>
+        <div class="grid grid-cols-1 justify-between items-center mt-5 border-t border-gray-200 dark:border-gray-700">
+          <div class="flex justify-between items-center pt-5">
+            <!-- Button -->
+            <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom" class="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900" type="button">
+              Last 7 days
+              <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+              </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="lastDaysdropdown" class="w-44 z-10 hidden bg-white rounded-lg divide-y divide-gray-100 shadow">
+              <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100">Yesterday</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100">Today</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100">Last 7 days</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100">Last 30 days</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100">Last 90 days</a>
+                </li>
+              </ul>
+            </div>
+            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-semibold text-blue-600 uppercase rounded-lg hover:text-blue-700 hover:bg-gray-100">
+              Sales Report
+              <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      {{-- Conductividad Chart --}}
+      <div class="p-4 bg-white rounded-lg shadow-sm dark:bg-gray-800 sm:p-6">
+        <div class="flex justify-between mb-5">
+          <div>
+            <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">Medición de Conductividad</h5>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">Historico</p>
+          </div>
+          <div class="flex flex-col justify-center items-center px-2.5 py-0.5 text-base font-semibold text-center text-green-500">
+            <img src="{{ asset('build/assets/img/Conductivity.svg') }}" alt="" class="w-10 h-10">
+          </div>
+        </div>
+        <div id="cond-chart" style="min-height: 435px;"></div>
+        <div class="grid grid-cols-1 justify-between items-center mt-5 border-t border-gray-200 dark:border-gray-700">
+          <div class="flex justify-between items-center pt-5">
+            <!-- Button -->
+            <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom" class="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900" type="button">
+              Last 7 days
+              <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+              </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="lastDaysdropdown" class="w-44 z-10 hidden bg-white rounded-lg divide-y divide-gray-100 shadow">
+              <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100">Yesterday</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100">Today</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100">Last 7 days</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100">Last 30 days</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100">Last 90 days</a>
+                </li>
+              </ul>
+            </div>
+            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-semibold text-blue-600 uppercase rounded-lg hover:text-blue-700 hover:bg-gray-100">
+              Sales Report
+              <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="w-full grid grid-cols-1 gap-4 mt-4 2xl:grid-cols-3 xl:grid-cols-2">
         <div class="justify-between items-center p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:flex sm:p-6">
             <div class="w-full">

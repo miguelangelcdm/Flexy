@@ -1,4 +1,8 @@
-export default function getTempChartOptions(globalTempData,minthreshold,maxthreshold) {
+export default function getOdChartOptions(
+    globalPhData,
+    minthreshold,
+    maxthreshold
+) {
     let mainChartColors = {};
 
     if (document.documentElement.classList.contains("dark")) {
@@ -27,14 +31,6 @@ export default function getTempChartOptions(globalTempData,minthreshold,maxthres
                 show: false,
             },
         },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: "70%",
-                borderRadiusApplication: "end",
-                borderRadius: 4,
-            },
-        },
         dataLabels: {
             enabled: false,
         },
@@ -58,8 +54,8 @@ export default function getTempChartOptions(globalTempData,minthreshold,maxthres
         },
         series: [
             {
-                name: "Temperature",
-                data: globalTempData,
+                name: "Ph",
+                data: globalPhData,
                 color: "#1A56DB",
             },
         ],
@@ -99,9 +95,7 @@ export default function getTempChartOptions(globalTempData,minthreshold,maxthres
                     fontWeight: 500,
                 },
                 formatter: function (value) {
-                    return (
-                        value +"º"
-                    );
+                    return value+" ppm";
                 },
             },
         },

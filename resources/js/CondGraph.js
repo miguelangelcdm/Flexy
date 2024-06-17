@@ -1,4 +1,8 @@
-export default function getTempChartOptions(globalTempData,minthreshold,maxthreshold) {
+export default function getCondChartOptions(
+    globalPhData,
+    minthreshold,
+    maxthreshold
+) {
     let mainChartColors = {};
 
     if (document.documentElement.classList.contains("dark")) {
@@ -20,19 +24,19 @@ export default function getTempChartOptions(globalTempData,minthreshold,maxthres
     return {
         chart: {
             height: 460,
-            type: "bar",
+            type: "area",
             fontFamily: "Inter, sans-serif",
             foreColor: mainChartColors.labelColor,
             toolbar: {
                 show: false,
             },
         },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: "70%",
-                borderRadiusApplication: "end",
-                borderRadius: 4,
+        fill: {
+            type: "gradient",
+            gradient: {
+                enabled: true,
+                opacityFrom: mainChartColors.opacityFrom,
+                opacityTo: mainChartColors.opacityTo,
             },
         },
         dataLabels: {
@@ -58,8 +62,8 @@ export default function getTempChartOptions(globalTempData,minthreshold,maxthres
         },
         series: [
             {
-                name: "Temperature",
-                data: globalTempData,
+                name: "Ph",
+                data: globalPhData,
                 color: "#1A56DB",
             },
         ],
@@ -99,9 +103,7 @@ export default function getTempChartOptions(globalTempData,minthreshold,maxthres
                     fontWeight: 500,
                 },
                 formatter: function (value) {
-                    return (
-                        value +"º"
-                    );
+                    return value +" uS/cm";
                 },
             },
         },

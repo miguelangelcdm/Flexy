@@ -4,13 +4,16 @@ import "flowbite/dist/flowbite.min.js";
 import ApexCharts from "apexcharts";
 import axios from "axios";
 import getPhChartOptions from "./pHGraph.js";
+import getTempChartOptions from "./tempGraph.js";
+import getOdChartOptions from "./ODGraph.js";
+import getCondChartOptions from "./CondGraph.js";
 
 let globalThresholds;
 let globalPhData = [];
 let globalTemperaturaData = [];
 let globalOxigenoDisueltoData = [];
 let globalConductividadData = [];
-let chartPh;
+let chartPh,chartTemp,chartCond,chartOD;
 
 // Function to initialize the MQTT client
 function initializeMQTT() {
@@ -91,6 +94,24 @@ function initializeMQTT() {
                 data: globalPhData,
             },
         ]);
+        chartTemp.updateSeries([
+            {
+                name: "Temperatura",
+                data: globalTemperaturaData,
+            },
+        ]);
+        chartOD.updateSeries([
+            {
+                name: "Oxigeno disuelto",
+                data: globalOxigenoDisueltoData,
+            },
+        ]);
+        chartCond.updateSeries([
+            {
+                name: "Conductividad",
+                data: globalConductividadData,
+            },
+        ]);
     });
 }
 
@@ -125,24 +146,79 @@ function processData() {
     console.log("Promedio del pH:", phPromedio);
 }
 
-if (document.getElementById("main-chart")) {
+if (document.getElementById("ph-chart")) {
     fetchData().then(() => {
         processData();
         chartPh = new ApexCharts(
-            document.getElementById("main-chart"),
-            getPhChartOptions(globalPhData)
+            document.getElementById("ph-chart"),
+            getPhChartOptions(globalPhData,globalThresholds['min']['ph'] ,globalThresholds['max']['ph'])
         );
         chartPh.render();
 
+
+        
+
+        chartCond = new ApexCharts(
+            document.getElementById("cond-chart"),
+            getCondChartOptions(
+                globalConductividadData,
+                globalThresholds["min"]["conductividad"],
+                globalThresholds["max"]["conductividad"]
+            )
+        );
+        chartCond.render();
+
         // init again when toggling dark mode
         document.addEventListener("dark-mode", function () {
-            chartPh.updateOptions(getPhChartOptions(globalPhData));
+            chartPh.updateOptions(getPhChartOptions(globalPhData,globalThresholds['min']['ph'] ,globalThresholds['max']['ph']));
+            chartCond.updateOptions(getCondChartOptions(globalConductividadData, globalThresholds['min']['conductividad'],globalThresholds['max']['conductividad']));
         });
 
         // Initialize MQTT client
         initializeMQTT();
     });
+                
 }
+
+if (document.getElementById("temp-chart")) {
+    chartTemp = new ApexCharts(
+        document.getElementById("temp-chart"),
+        getTempChartOptions(
+            globalTemperaturaData,
+            globalThresholds["min"]["temperatura"],
+            globalThresholds["max"]["temperatura"]
+        )
+    );
+    chartTemp.render();
+
+    document.addEventListener("dark-mode", function () {
+            chartTemp.updateOptions(getTempChartOptions(globalTemperaturaData, globalThresholds['min']['temperatura'],globalThresholds['max']['temperatura']));
+        });
+
+}
+
+if (document.getElementById("od-chart")) {
+    chartOD = new ApexCharts(
+        document.getElementById("od-chart"),
+        getOdChartOptions(
+            globalOxigenoDisueltoData,
+            globalThresholds["min"]["oxigeno_disuelto"],
+            globalThresholds["max"]["oxigeno_disuelto"]
+        )
+    );
+    chartOD.render();
+
+    document.addEventListener("dark-mode", function () {
+        chartOD.updateOptions(
+            getOdChartOptions(
+                globalOxigenoDisueltoData,
+                globalThresholds["min"]["oxigeno_disuelto"],
+                globalThresholds["max"]["oxigeno_disuelto"]
+            )
+        );
+    });
+}
+
 
 // Support Chart
 

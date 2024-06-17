@@ -1,4 +1,8 @@
-export default function getPhChartOptions(globalPhData) {
+export default function getPhChartOptions(
+    globalPhData,
+    minthreshold,
+    maxthreshold
+) {
     let mainChartColors = {};
 
     if (document.documentElement.classList.contains("dark")) {
@@ -72,15 +76,7 @@ export default function getPhChartOptions(globalPhData) {
             },
         },
         xaxis: {
-            // type: "datetime",
-            // categories: timestamps, // Timestamps for x-axis labels
-            // labels: {
-            //     show: true,
-            //     formatter: function (value) {
-            //         return new Date(value).toLocaleString();
-            //     },
-            // },
-            show: false, // Hide the x-axis
+            show: false,
             labels: {
                 show: false,
             },
@@ -117,7 +113,7 @@ export default function getPhChartOptions(globalPhData) {
         annotations: {
             yaxis: [
                 {
-                    y: 12,
+                    y: maxthreshold,
                     borderColor: "#FF0000",
                     label: {
                         borderColor: "#FF0000",
@@ -125,7 +121,19 @@ export default function getPhChartOptions(globalPhData) {
                             color: "#fff",
                             background: "#FF0000",
                         },
-                        text: "Dangerous Limit",
+                        text: "Max límite ECA: " + maxthreshold,
+                    },
+                },
+                {
+                    y: minthreshold,
+                    borderColor: "#54cdff",
+                    label: {
+                        borderColor: "#54cdff",
+                        style: {
+                            color: "#fff",
+                            background: "#54cdff",
+                        },
+                        text: "Min límite ECA: " + minthreshold,
                     },
                 },
             ],
