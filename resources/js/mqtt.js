@@ -1,32 +1,111 @@
-import mqtt from "mqtt"; // import namespace "mqtt"
+import mqtt from "mqtt";
 import "flowbite";
 import "flowbite/dist/flowbite.min.js";
 import ApexCharts from "apexcharts";
 import axios from "axios";
-//import './pruebas';
+import getPhChartOptions from "./pHGraph.js";
 
 let globalPhData = [];
 let globalTemperaturaData = [];
 let globalOxigenoDisueltoData = [];
 let globalConductividadData = [];
+let chartPh;
 
-function fetchData() {
-    //return
-    return axios
-        .get("/data/getAll")
-        .then(function (response) {
-            console.log("Datos recibidos:", response.data);
-            // Almacenar los datos globalmente
-            globalPhData = response.data.ph;
-            globalTemperaturaData = response.data.temperatura;
-            globalOxigenoDisueltoData = response.data.oxigenoDisuelto;
-            globalConductividadData = response.data.conductividad;
-            //return response.data;  // Devuelve directamente los datos de la respuesta.
-        })
-        .catch(function (error) {
-            console.error("Error al obtener los datos:", error);
-            throw error; // Relanza el error para poder capturarlo más adelante si es necesario.
+// Function to initialize the MQTT client
+function initializeMQTT() {
+    const client = mqtt.connect("wss://broker.emqx.io:8084/mqtt");
+
+    client.on("connect", function () {
+        console.log("Conectado al broker MQTT");
+        client.subscribe("salida/01", function (err) {
+            if (!err) {
+                console.log("Suscrito al tema salida/01");
+            }
         });
+    });
+
+    client.on("message", async function (topic, message) {
+        // Mensaje recibido
+        console.log("Mensaje recibido:", message.toString());
+        const data = JSON.parse(message.toString());
+        axios
+            .post("/data/save", {
+                dispositivo: data.Dispositivo,
+                id: data.Id,
+                timestamp: data.Timestamp,
+                ph: data.Data.Ph,
+                temperatura: data.Data.Temperatura,
+                conductividad: data.Data.Conductividad,
+                oxigeno_disuelto: data.Data.OxigenoDisuelto,
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        const tableBody = document.getElementById("data-body");
+
+        // Crear una nueva fila
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">${data.Dispositivo}</td>
+            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">${data.Timestamp}</td>
+            <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">${data.Data.Ph}</td>
+            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">${data.Data.Temperatura}</td>
+            <td class="inline-flex items-center p-4 space-x-2 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">${data.Data.Conductividad}</td>
+            <td class="p-4 whitespace-nowrap">${data.Data.OxigenoDisuelto}</td>
+        `;
+
+        // Agregar la nueva fila al principio del cuerpo de la tabla
+        tableBody.insertBefore(newRow, tableBody.firstChild);
+
+        // Mostrar scroll solo si hay datos
+        const overflowDiv = document.querySelector(".overflow-y-auto");
+        if (tableBody.children.length > 0) {
+            overflowDiv.style.overflowY = "auto";
+        } else {
+            overflowDiv.style.overflowY = "hidden";
+        }
+
+        // Update global data arrays with new data, keeping only the last 10 values
+        globalPhData.push(data.Data.Ph);
+        globalTemperaturaData.push(data.Data.Temperatura);
+        globalOxigenoDisueltoData.push(data.Data.OxigenoDisuelto);
+        globalConductividadData.push(data.Data.Conductividad);
+
+        // Ensure we only keep the last 10 entries
+        if (globalPhData.length > 10) globalPhData.shift();
+        if (globalTemperaturaData.length > 10) globalTemperaturaData.shift();
+        if (globalOxigenoDisueltoData.length > 10)
+            globalOxigenoDisueltoData.shift();
+        if (globalConductividadData.length > 10)
+            globalConductividadData.shift();
+
+        // Update the chartPh with new data
+        chartPh.updateSeries([
+            {
+                name: "Ph",
+                data: globalPhData,
+            },
+        ]);
+    });
+}
+
+async function fetchData() {
+    try {
+        const response = await axios.get("/data/getAll");
+        console.log("Datos recibidos:", response.data);
+        // Almacenar los datos globalmente
+        globalPhData = response.data.ph;
+        globalTemperaturaData = response.data.temperatura;
+        globalOxigenoDisueltoData = response.data.oxigenoDisuelto;
+        globalConductividadData = response.data.conductividad;
+    } catch (error) {
+        console.error("Error al obtener los datos:", error);
+        throw error; // Relanza el error para poder capturarlo más adelante si es necesario.
+    }
 }
 
 function processData() {
@@ -43,196 +122,25 @@ function processData() {
         globalPhData.length;
     console.log("Promedio del pH:", phPromedio);
 }
-// Main Chart
-const getMainChartOptions = () => {
-    let mainChartColors = {};
-
-    if (document.documentElement.classList.contains("dark")) {
-        mainChartColors = {
-            borderColor: "#374151",
-            labelColor: "#9CA3AF",
-            opacityFrom: 0,
-            opacityTo: 0.15,
-        };
-    } else {
-        mainChartColors = {
-            borderColor: "#F3F4F6",
-            labelColor: "#6B7280",
-            opacityFrom: 0.45,
-            opacityTo: 0,
-        };
-    }
-
-    return {
-        chart: {
-            height: 460,
-            type: "area",
-            fontFamily: "Inter, sans-serif",
-            foreColor: mainChartColors.labelColor,
-            toolbar: {
-                show: false,
-            },
-        },
-        fill: {
-            type: "gradient",
-            gradient: {
-                enabled: true,
-                opacityFrom: mainChartColors.opacityFrom,
-                opacityTo: mainChartColors.opacityTo,
-            },
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        tooltip: {
-            style: {
-                fontSize: "14px",
-                fontFamily: "Inter, sans-serif",
-            },
-        },
-        grid: {
-            show: true,
-            borderColor: mainChartColors.borderColor,
-            strokeDashArray: 1,
-            padding: {
-                left: 35,
-                bottom: 15,
-            },
-        },
-        series: [
-            {
-                name: "Ph",
-                data: globalPhData,
-                color: "#1A56DB",
-            },
-            {
-                name: "Temperatura",
-                data: globalTemperaturaData,
-                color: "#FDBA8C",
-            },
-            {
-                name: "Oxigeno Disuelto",
-                data: globalOxigenoDisueltoData,
-                color: "#1A56DB",
-            },
-            {
-                name: "Conductividad",
-                data: globalConductividadData,
-                color: "#FDBA8C",
-            },
-        ],
-        markers: {
-            size: 5,
-            strokeColors: "#ffffff",
-            hover: {
-                size: undefined,
-                sizeOffset: 3,
-            },
-        },
-        xaxis: {
-            categories: [
-                "01 Feb",
-                "02 Feb",
-                "03 Feb",
-                "04 Feb",
-                "05 Feb",
-                "06 Feb",
-                "07 Feb",
-            ],
-            labels: {
-                style: {
-                    colors: [mainChartColors.labelColor],
-                    fontSize: "14px",
-                    fontWeight: 500,
-                },
-            },
-            axisBorder: {
-                color: mainChartColors.borderColor,
-            },
-            axisTicks: {
-                color: mainChartColors.borderColor,
-            },
-            crosshairs: {
-                show: true,
-                position: "back",
-                stroke: {
-                    color: mainChartColors.borderColor,
-                    width: 1,
-                    dashArray: 10,
-                },
-            },
-        },
-        yaxis: {
-            labels: {
-                style: {
-                    colors: [mainChartColors.labelColor],
-                    fontSize: "14px",
-                    fontWeight: 500,
-                },
-                formatter: function (value) {
-                    return "$" + value;
-                },
-            },
-        },
-        legend: {
-            fontSize: "14px",
-            fontWeight: 500,
-            fontFamily: "Inter, sans-serif",
-            labels: {
-                colors: [mainChartColors.labelColor],
-            },
-            itemMargin: {
-                horizontal: 10,
-            },
-        },
-        responsive: [
-            {
-                breakpoint: 1024,
-                options: {
-                    xaxis: {
-                        labels: {
-                            show: false,
-                        },
-                    },
-                },
-            },
-        ],
-    };
-};
 
 if (document.getElementById("main-chart")) {
     fetchData().then(() => {
         processData();
-        const chart = new ApexCharts(
+        chartPh = new ApexCharts(
             document.getElementById("main-chart"),
-            getMainChartOptions()
+            getPhChartOptions(globalPhData)
         );
-        chart.render();
+        chartPh.render();
 
         // init again when toggling dark mode
         document.addEventListener("dark-mode", function () {
-            chart.updateOptions(getMainChartOptions());
+            chartPh.updateOptions(getPhChartOptions(globalPhData));
         });
+
+        // Initialize MQTT client
+        initializeMQTT();
     });
 }
-
-// if (document.getElementById("main-chart")) {
-
-//     fetchData().then(() => {
-//         processData();
-//     });
-
-//     const chart = new ApexCharts(
-//         document.getElementById("main-chart"),
-//         getMainChartOptions()
-//     );
-//     chart.render();
-
-//     // init again when toggling dark mode
-//     document.addEventListener("dark-mode", function () {
-//         chart.updateOptions(getMainChartOptions());
-//     });
-// }
 
 // Support Chart
 
@@ -787,113 +695,77 @@ if (document.getElementById("traffic-by-device")) {
     });
 }
 
-// Conexión al broker MQTT
-// const client = mqtt.connect('wss://broker.emqx.io:8084/mqtt');
+// // Conexión al broker MQTT
+// const client = mqtt.connect("wss://broker.emqx.io:8084/mqtt");
 
-// client.on('connect', function () {
-//     console.log('Conectado al broker MQTT');
-//     client.subscribe('salida/01', function (err) {
+// client.on("connect", function () {
+//     console.log("Conectado al broker MQTT");
+//     client.subscribe("salida/01", function (err) {
 //         if (!err) {
-//             console.log('Suscrito al tema salida/01');
+//             console.log("Suscrito al tema salida/01");
 //         }
 //     });
 // });
 
-// client.on('message', function (topic, message) {
+// client.on("message", async function (topic, message) {
 //     // Mensaje recibido
-//     console.log('Mensaje recibido:', message.toString());
+//     console.log("Mensaje recibido:", message.toString());
 //     const data = JSON.parse(message.toString());
 
-//     document.getElementById('device').innerText = data.Dispositivo;
-//     document.getElementById('id').innerText = data.Id;
-//     document.getElementById('timestamp').innerText = data.Timestamp;
-//     document.getElementById('ph').innerText = data.Data.Ph;
-//     document.getElementById('temperature').innerText = data.Data.Temperatura;
-//     document.getElementById('conductivity').innerText = data.Data.Conductividad;
-//     document.getElementById('oxygen').innerText = data.Data.OxigenoDisuelto;
+//     axios
+//         .post("/data/save", {
+//             dispositivo: data.Dispositivo,
+//             id: data.Id,
+//             timestamp: data.Timestamp,
+//             ph: data.Data.Ph,
+//             temperatura: data.Data.Temperatura,
+//             conductividad: data.Data.Conductividad,
+//             oxigeno_disuelto: data.Data.OxigenoDisuelto,
+//         })
+//         .then(function (response) {
+//             console.log(response);
+//         })
+//         .catch(function (error) {
+//             console.log(error);
+//         });
+
+//     const tableBody = document.getElementById("data-body");
+
+//     // Crear una nueva fila
+//     const newRow = document.createElement("tr");
+//     newRow.innerHTML = `
+//         <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">${data.Dispositivo}</td>
+//         <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">${data.Timestamp}</td>
+//         <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">${data.Data.Ph}</td>
+//         <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">${data.Data.Temperatura}</td>
+//         <td class="inline-flex items-center p-4 space-x-2 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">${data.Data.Conductividad}</td>
+//         <td class="p-4 whitespace-nowrap">${data.Data.OxigenoDisuelto}</td>
+//     `;
+
+//     // Agregar la nueva fila al principio del cuerpo de la tabla
+//     tableBody.insertBefore(newRow, tableBody.firstChild);
+
+//     // Mostrar scroll solo si hay datos
+//     const overflowDiv = document.querySelector(".overflow-y-auto");
+//     if (tableBody.children.length > 0) {
+//         overflowDiv.style.overflowY = "auto";
+//     } else {
+//         overflowDiv.style.overflowY = "hidden";
+//     }
+//     fetchData().then(() => {
+//         processData();
+//         const chart = new ApexCharts(
+//             document.getElementById("main-chart"),
+//             getMainChartOptions()
+//         );
+//         chart.render();
+
+//         // init again when toggling dark mode
+//         document.addEventListener("dark-mode", function () {
+//             chart.updateOptions(getMainChartOptions());
+//         });
+//     });
 // });
-
-// if (
-//     localStorage.getItem("color-theme") === "dark" ||
-//     (!("color-theme" in localStorage) &&
-//         window.matchMedia("(prefers-color-scheme: dark)").matches)
-// ) {
-//     document.documentElement.classList.add("dark");
-// } else {
-//     document.documentElement.classList.remove("dark");
-// }
-
-// Conexión al broker MQTT
-const client = mqtt.connect("wss://broker.emqx.io:8084/mqtt");
-
-client.on("connect", function () {
-    console.log("Conectado al broker MQTT");
-    client.subscribe("salida/01", function (err) {
-        if (!err) {
-            console.log("Suscrito al tema salida/01");
-        }
-    });
-});
-
-client.on("message", async function (topic, message) {
-    // Mensaje recibido
-    console.log("Mensaje recibido:", message.toString());
-    const data = JSON.parse(message.toString());
-
-    axios
-        .post("/data/save", {
-            dispositivo: data.Dispositivo,
-            id: data.Id,
-            timestamp: data.Timestamp,
-            ph: data.Data.Ph,
-            temperatura: data.Data.Temperatura,
-            conductividad: data.Data.Conductividad,
-            oxigeno_disuelto: data.Data.OxigenoDisuelto,
-        })
-        .then(function (response) {
-            console.log(response);
-            fetchData().then(() => {
-                processData();
-                const chart = new ApexCharts(
-                    document.getElementById("main-chart"),
-                    getMainChartOptions()
-                );
-                chart.render();
-
-                // init again when toggling dark mode
-                document.addEventListener("dark-mode", function () {
-                    chart.updateOptions(getMainChartOptions());
-                });
-            });
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-
-    const tableBody = document.getElementById("data-body");
-
-    // Crear una nueva fila
-    const newRow = document.createElement("tr");
-    newRow.innerHTML = `
-        <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">${data.Dispositivo}</td>
-        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">${data.Timestamp}</td>
-        <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">${data.Data.Ph}</td>
-        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">${data.Data.Temperatura}</td>
-        <td class="inline-flex items-center p-4 space-x-2 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">${data.Data.Conductividad}</td>
-        <td class="p-4 whitespace-nowrap">${data.Data.OxigenoDisuelto}</td>
-    `;
-
-    // Agregar la nueva fila al principio del cuerpo de la tabla
-    tableBody.insertBefore(newRow, tableBody.firstChild);
-
-    // Mostrar scroll solo si hay datos
-    const overflowDiv = document.querySelector(".overflow-y-auto");
-    if (tableBody.children.length > 0) {
-        overflowDiv.style.overflowY = "auto";
-    } else {
-        overflowDiv.style.overflowY = "hidden";
-    }
-});
 
 // Tema oscuro
 if (

@@ -1,32 +1,35 @@
 <x-safe-layout>
   <div class="px-4 pt-6 2xl:px-0">
-    <div class="grid gap-4 xl:grid-cols-2 2xl:grid-cols-3">
+    <div class="grid gap-4 2xl:grid-cols-2 xl:grid-cols-2">
         {{-- Main Chart --}}
-      <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 sm:p-6">
+      <div class="p-4 bg-white rounded-lg shadow-sm dark:bg-gray-800 sm:p-6">
         <div class="flex justify-between mb-5">
           <div>
-            <h5 class="leading-none text-3xl font-bold text-gray-900 pb-2">$12,423</h5>
-            <p class="text-base font-normal text-gray-500">Sales this week</p>
+            <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">Medición de pH</h5>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">Historico</p>
           </div>
-          <div class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 text-center">
-            23%
-            <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
-            </svg>
+          <div class="flex flex-col justify-end items-end px-2.5 py-0.5 text-base font-semibold text-center text-green-500">
+            <div class="flex justify-center items-center">
+              23%
+              <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
+              </svg>
+            </div>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">En relacion a la última semana</p>
           </div>
         </div>
         <div id="main-chart" style="min-height: 435px;"></div>
-        <div class="grid grid-cols-1 items-center border-gray-200 border-t justify-between mt-5">
+        <div class="grid grid-cols-1 justify-between items-center mt-5 border-t border-gray-200 dark:border-gray-700">
           <div class="flex justify-between items-center pt-5">
             <!-- Button -->
-            <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom" class="text-sm font-medium text-gray-500 hover:text-gray-900 text-center inline-flex items-center" type="button">
+            <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom" class="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900" type="button">
               Last 7 days
               <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
               </svg>
             </button>
             <!-- Dropdown menu -->
-            <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+            <div id="lastDaysdropdown" class="w-44 z-10 hidden bg-white rounded-lg divide-y divide-gray-100 shadow">
               <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                 <li>
                   <a href="#" class="block px-4 py-2 hover:bg-gray-100">Yesterday</a>
@@ -45,7 +48,7 @@
                 </li>
               </ul>
             </div>
-            <a href="#" class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700  hover:bg-gray-100 px-3 py-2">
+            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-semibold text-blue-600 uppercase rounded-lg hover:text-blue-700 hover:bg-gray-100">
               Sales Report
               <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
@@ -55,14 +58,14 @@
         </div>
       </div>
       {{-- Support Chart --}}
-      <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6">
-        <div class="flex justify-between border-gray-200 border-b pb-3">
+      <div class="p-4 bg-white rounded-lg shadow-sm dark:bg-gray-800 sm:p-6">
+        <div class="flex justify-between pb-3 border-b border-gray-200">
           <dl>
-            <dt class="text-base font-normal text-gray-500 pb-1">Profit</dt>
-            <dd class="leading-none text-3xl font-bold text-gray-900">$5,405</dd>
+            <dt class="pb-1 text-base font-normal text-gray-500 dark:text-white">Profit</dt>
+            <dd class="text-3xl font-bold leading-none text-gray-900 dark:text-white">$5,405</dd>
           </dl>
           <div>
-            <span class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md">
+            <span class="inline-flex items-center px-2.5 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-md">
               <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
               </svg>
@@ -73,27 +76,27 @@
 
         <div class="grid grid-cols-2 py-3">
           <dl>
-            <dt class="text-base font-normal text-gray-500 pb-1">Income</dt>
-            <dd class="leading-none text-xl font-bold text-green-500">$23,635</dd>
+            <dt class="pb-1 text-base font-normal text-gray-500">Income</dt>
+            <dd class="text-xl font-bold leading-none text-green-500">$23,635</dd>
           </dl>
           <dl>
-            <dt class="text-base font-normal text-gray-500 pb-1">Expense</dt>
-            <dd class="leading-none text-xl font-bold text-red-600">-$18,230</dd>
+            <dt class="pb-1 text-base font-normal text-gray-500">Expense</dt>
+            <dd class="text-xl font-bold leading-none text-red-600">-$18,230</dd>
           </dl>
         </div>
 
         <div id="bar-chart"></div>
-        <div class="grid grid-cols-1 items-center border-gray-200 border-t justify-between">
+        <div class="grid grid-cols-1 justify-between items-center border-t border-gray-200">
           <div class="flex justify-between items-center pt-5">
             <!-- Button -->
-            <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom" class="text-sm font-medium text-gray-500 hover:text-gray-900 text-center inline-flex items-center" type="button">
+            <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom" class="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900" type="button">
               Last 6 months
               <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
               </svg>
             </button>
             <!-- Dropdown menu -->
-            <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+            <div id="lastDaysdropdown" class="w-44 z-10 hidden bg-white rounded-lg divide-y divide-gray-100 shadow">
               <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                 <li>
                   <a href="#" class="block px-4 py-2 hover:bg-gray-100">Yesterday</a>
@@ -118,7 +121,7 @@
                 </li>
               </ul>
             </div>
-            <a href="#" class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700  hover:bg-gray-100 px-3 py-2">
+            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-semibold text-blue-600 uppercase rounded-lg hover:text-blue-700 hover:bg-gray-100">
               Revenue Report
               <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
@@ -129,8 +132,8 @@
 
       </div>
     </div>
-    <div class="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3">
-        <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex sm:p-6">
+    <div class="w-full grid grid-cols-1 gap-4 mt-4 2xl:grid-cols-3 xl:grid-cols-2">
+        <div class="justify-between items-center p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:flex sm:p-6">
             <div class="w-full">
               <h3 class="text-base font-normal text-gray-500">New products</h3>
               <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl">2,340</span>
@@ -144,9 +147,9 @@
                 Since last month
               </p>
             </div>
-            <div class="w-full min-h-[155px]" id="new-products-chart"></div>
+            <div class="min-h-[155px] w-full" id="new-products-chart"></div>
         </div>
-        <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex sm:p-6">
+        <div class="justify-between items-center p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:flex sm:p-6">
             <div class="w-full">
               <h3 class="text-base font-normal text-gray-500">Users</h3>
               <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl">2,340</span>
@@ -160,33 +163,33 @@
                 Since last month
               </p>
             </div>
-            <div class="w-full min-h-[155px]" id="week-signups-chart"></div>
+            <div class="min-h-[155px] w-full" id="week-signups-chart"></div>
         </div>
-        <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6">
+        <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6">
           <div class="w-full">
             <h3 class="mb-2 text-base font-normal text-gray-500">Audience by age</h3>
             <div class="flex items-center mb-2">
               <div class="w-16 text-sm font-medium">50+</div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 18%"></div>
+              <div class="w-full h-2.5 bg-gray-200 rounded-full">
+                <div class="h-2.5 bg-blue-600 rounded-full" style="width: 18%"></div>
               </div>
             </div>
             <div class="flex items-center mb-2">
               <div class="w-16 text-sm font-medium">40+</div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 15%"></div>
+              <div class="w-full h-2.5 bg-gray-200 rounded-full">
+                <div class="h-2.5 bg-blue-600 rounded-full" style="width: 15%"></div>
               </div>
             </div>
             <div class="flex items-center mb-2">
               <div class="w-16 text-sm font-medium">30+</div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 60%"></div>
+              <div class="w-full h-2.5 bg-gray-200 rounded-full">
+                <div class="h-2.5 bg-blue-600 rounded-full" style="width: 60%"></div>
               </div>
             </div>
             <div class="flex items-center mb-2">
               <div class="w-16 text-sm font-medium">20+</div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 30%"></div>
+              <div class="w-full h-2.5 bg-gray-200 rounded-full">
+                <div class="h-2.5 bg-blue-600 rounded-full" style="width: 30%"></div>
               </div>
             </div>
           </div>
@@ -195,22 +198,22 @@
 
     </div>
     <div class="grid grid-cols-1 my-4 xl:grid-cols-2 xl:gap-4">
-        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 xl:mb-0">
-          <div class="flex items-center justify-between mb-4">
+        <div class="p-4 mb-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6 xl:mb-0">
+          <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-semibold text-gray-900">Smart chat</h3>
-            <a href="#" class="inline-flex items-center p-2 text-sm font-medium rounded-lg text-blue-700 hover:bg-gray-100">
+            <a href="#" class="inline-flex items-center p-2 text-sm font-medium text-blue-700 rounded-lg hover:bg-gray-100">
               View all
             </a>
           </div>
           <!-- Chat -->
-          <form class="overflow-y-auto lg:max-h-[60rem] 2xl:max-h-fit">
+          <form class="overflow-y-auto 2xl:max-h-fit lg:max-h-[60rem]">
             <article class="mb-5">
-              <footer class="flex items-center justify-between mb-2">
+              <footer class="flex justify-between items-center mb-2">
                 <div class="flex items-center">
                   <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Michael Gough">Michael Gough</p>
                   <p class="text-sm text-gray-600"><time pubdate="" datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023 4:15 PM</time></p>
                 </div>
-                <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+                <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-50 hover:bg-gray-100" type="button">
                   <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z">
                     </path>
@@ -218,7 +221,7 @@
                   <span class="sr-only">Comment settings</span>
                 </button>
                 <!-- Dropdown menu -->
-                <div id="dropdownComment1" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-36" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(844.5px, 1082px, 0px);" data-popper-placement="bottom">
+                <div id="dropdownComment1" class="w-36 z-10 hidden bg-white rounded divide-y divide-gray-100 shadow" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(844.5px, 1082px, 0px);" data-popper-placement="bottom">
                   <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownMenuIconHorizontalButton">
                     <li>
                       <a href="#" class="block px-4 py-2 hover:bg-gray-100">Edit</a>
@@ -233,7 +236,7 @@
                 </div>
               </footer>
               <p class="mb-2 text-gray-900">
-                Hello <a href="#" class="font-medium hover:underline text-blue-600">@designteam</a> Let's schedule a kick-off meeting and workshop this week. It would be great to gather everyone involved in the design project. Let me know about your availability in the thread.
+                Hello <a href="#" class="font-medium text-blue-600 hover:underline">@designteam</a> Let's schedule a kick-off meeting and workshop this week. It would be great to gather everyone involved in the design project. Let me know about your availability in the thread.
               </p>
               <p class="mb-3 text-gray-900">Looking forward to it! Thanks.</p>
               <a href="#" class="inline-flex items-center text-xs font-medium text-blue-700 sm:text-sm">
@@ -244,12 +247,12 @@
               </a>
             </article>
             <article class="mb-5">
-              <footer class="flex items-center justify-between mb-2">
+              <footer class="flex justify-between items-center mb-2">
                 <div class="flex items-center">
                   <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="Bonnie avatar">Bonnie Green</p>
                   <p class="text-sm text-gray-600"><time pubdate="" datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023 4:15 PM</time></p>
                 </div>
-                <button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+                <button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-50 hover:bg-gray-100" type="button">
                   <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z">
                     </path>
@@ -257,7 +260,7 @@
                   <span class="sr-only">Comment settings</span>
                 </button>
                 <!-- Dropdown menu -->
-                <div id="dropdownComment2" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-36" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(844.5px, 1286px, 0px);" data-popper-placement="bottom">
+                <div id="dropdownComment2" class="w-36 z-10 hidden bg-white rounded divide-y divide-gray-100 shadow" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(844.5px, 1286px, 0px);" data-popper-placement="bottom">
                   <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownMenuIconHorizontalButton">
                     <li>
                       <a href="#" class="block px-4 py-2 hover:bg-gray-100">Edit</a>
@@ -277,14 +280,14 @@
               </p>
               <p class="mb-3 text-gray-900">Cheers!</p>
               <div class="flex items-center mb-2 space-x-2">
-                <button type="button" class="py-1.5 px-3 inline-flex items-center rounded-lg bg-gray-100 hover:bg-gray-200">
+                <button type="button" class="inline-flex items-center px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gray-200">
                   <svg aria-hidden="true" class="h-5 mr-2" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M24 14.1907C24 12.7352 23.7409 11.3397 23.2659 10.0486C22.9412 13.8526 20.9132 15.8065 18.7941 14.8966C16.8092 14.0439 18.1468 10.7199 18.2456 9.13377C18.4122 6.44506 18.2372 3.36742 13.3532 0.808594C15.3826 4.69095 13.5882 7.10295 11.7064 7.24977C9.61835 7.41283 7.70612 5.45542 8.412 2.27895C6.12635 3.96318 6.06 6.79801 6.76518 8.63189C7.50071 10.5434 6.73553 12.1317 4.94188 12.3081C2.93718 12.5058 1.82329 10.1615 2.85035 6.42601C1.07294 8.51895 0 11.2295 0 14.1907C0 20.8182 5.37247 26.1907 12 26.1907C18.6275 26.1907 24 20.8182 24 14.1907Z" fill="#F4900C"></path>
                     <path d="M19.3349 17.7211C19.4393 19.8981 17.5271 20.7515 16.4979 20.3393C15.0113 19.7442 15.4102 18.7221 15.0276 16.6044C14.645 14.4868 13.1746 13.0164 10.9984 12.3691C12.5866 16.8395 10.1182 18.487 8.82428 18.7814C7.50287 19.0821 6.17511 18.7807 6.02334 15.9529C4.4817 17.4875 3.52734 19.6108 3.52734 21.9571C3.52734 22.2169 3.54358 22.4724 3.56617 22.7266C5.73323 24.8682 8.70993 26.1924 11.9979 26.1924C15.2859 26.1924 18.2626 24.8682 20.4297 22.7266C20.4523 22.4724 20.4685 22.2169 20.4685 21.9571C20.4685 20.4134 20.0563 18.967 19.3349 17.7211Z" fill="#FFCC4D"></path>
                   </svg>
                   <span class="text-sm font-medium text-gray-500">14</span>
                 </button>
-                <button type="button" class="py-1.5 px-3 inline-flex items-center rounded-lg bg-gray-100 hover:bg-gray-200">
+                <button type="button" class="inline-flex items-center px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gray-200">
                   <svg aria-hidden="true" class="h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.24467 6.07733C3.87207 5.63882 4.81784 5.72291 5.38116 6.18812L4.73508 5.24903C4.21514 4.5075 4.40135 3.70523 5.14355 3.18462C5.88575 2.66601 7.98887 4.06031 7.98887 4.06031C7.46426 3.31143 7.56238 2.36233 8.31125 1.83705C9.06012 1.31377 10.0933 1.49465 10.6179 2.24486L17.5727 12.0697L16.6864 20.663L9.28906 17.9652L2.83686 8.3987C2.30758 7.64516 2.49046 6.60594 3.24467 6.07733Z" fill="#EF9645"></path>
                     <path d="M1.79857 11.5433C1.79857 11.5433 1.04302 10.442 2.14497 9.68715C3.24559 8.93226 4.00047 10.0329 4.00047 10.0329L7.50523 15.1442C7.62603 14.9426 7.75819 14.7437 7.90569 14.5475L3.04135 7.45454C3.04135 7.45454 2.28647 6.35392 3.38775 5.59904C4.48837 4.84416 5.24325 5.94478 5.24325 5.94478L9.81859 12.6172C9.98879 12.4784 10.163 12.3389 10.3425 12.2021L5.03835 4.46572C5.03835 4.46572 4.28347 3.3651 5.38475 2.61022C6.48537 1.85534 7.24025 2.95596 7.24025 2.95596L12.5444 10.691C12.7393 10.5715 12.9322 10.4681 13.1258 10.3586L8.168 3.12883C8.168 3.12883 7.41312 2.02821 8.51373 1.27333C9.61435 0.518448 10.3692 1.61907 10.3692 1.61907L15.6113 9.26398L16.4083 10.4267C13.1058 12.692 12.7914 16.9536 14.6783 19.7055C15.0554 20.2561 15.606 19.879 15.606 19.879C13.3414 16.5758 14.0328 12.8642 17.336 10.5995L16.3622 5.72586C16.3622 5.72586 15.9985 4.44169 17.282 4.07727C18.5661 3.71351 18.9306 4.99767 18.9306 4.99767L20.0552 8.33757C20.5011 9.66178 20.9756 10.9813 21.6037 12.2294C23.3771 15.7536 22.3178 20.1333 18.9739 22.4273C15.3263 24.9283 10.3399 23.9985 7.83828 20.3516L1.79857 11.5433Z" fill="#FFDC5D"></path>
@@ -294,7 +297,7 @@
                   </svg>
                   <span class="text-sm font-medium text-gray-500">8</span>
                 </button>
-                <button type="button" class="py-1.5 px-3 inline-flex items-center rounded-lg bg-gray-100 hover:bg-gray-200">
+                <button type="button" class="inline-flex items-center px-3 py-1.5 bg-gray-100 rounded-lg hover:bg-gray-200">
                   <svg aria-hidden="true" class="h-5 mr-2" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7.75255 5.29787C7.67789 5.37254 7.62122 5.46254 7.57388 5.56121L7.56855 5.55587L0.0910439 22.4003L0.0983774 22.4076C-0.0402924 22.6763 0.191713 23.223 0.667057 23.699C1.1424 24.1743 1.68908 24.4063 1.95775 24.2676L1.96442 24.2743L18.8088 16.7961L18.8035 16.7901C18.9015 16.7435 18.9915 16.6868 19.0668 16.6108C20.1082 15.5694 18.4195 12.1927 15.2961 9.06862C12.1713 5.94455 8.79458 4.25651 7.75255 5.29787Z" fill="#DD2E44"></path>
                     <path d="M8.66858 8.30273L0.279048 21.9737L0.0910439 22.3971L0.0983774 22.4044C-0.0402924 22.6731 0.191713 23.2197 0.667057 23.6958C0.821728 23.8504 0.982398 23.9678 1.13973 24.0671L11.3353 11.6361L8.66858 8.30273Z" fill="#EA596E"></path>
@@ -317,19 +320,19 @@
               </div>
             </article>
             <article class="mb-5">
-              <footer class="flex items-center justify-between mb-2">
+              <footer class="flex justify-between items-center mb-2">
                 <div class="flex items-center">
                   <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="Jese avatar">Jese Leos</p>
                   <p class="text-sm text-gray-600"><time pubdate="" datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023 4:15 PM</time></p>
                 </div>
-                <button id="dropdownComment3Button" data-dropdown-toggle="dropdownComment3" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+                <button id="dropdownComment3Button" data-dropdown-toggle="dropdownComment3" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-50 hover:bg-gray-100" type="button">
                   <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
                   </svg>
                   <span class="sr-only">Comment settings</span>
                 </button>
                 <!-- Dropdown menu -->
-                <div id="dropdownComment3" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-36" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(844.5px, 1558px, 0px);" data-popper-placement="bottom">
+                <div id="dropdownComment3" class="w-36 z-10 hidden bg-white rounded divide-y divide-gray-100 shadow" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(844.5px, 1558px, 0px);" data-popper-placement="bottom">
                   <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownMenuIconHorizontalButton">
                     <li>
                       <a href="#" class="block px-4 py-2 hover:bg-gray-100">Edit</a>
@@ -344,13 +347,13 @@
                 </div>
               </footer>
               <p class="mb-2 text-gray-900">
-                Ok <a href="#" class="font-medium hover:underline text-blue-600">@team</a> I'am attaching our offer and pitch deck. Take your time to review everything. I'am looking forward to the next steps! Thank you.
+                Ok <a href="#" class="font-medium text-blue-600 hover:underline">@team</a> I'am attaching our offer and pitch deck. Take your time to review everything. I'am looking forward to the next steps! Thank you.
               </p>
               <p class="mb-3 text-gray-900">Looking forward to it! Thanks.</p>
-              <div class="items-center 2xl:space-x-4 2xl:flex">
+              <div class="items-center 2xl:flex 2xl:space-x-4">
                 <!-- Item -->
-                <div class="flex items-center p-3 mb-3.5 border border-gray-200 rounded-lg">
-                  <div class="flex items-center justify-center w-10 h-10 mr-3 rounded-lg bg-blue-100">
+                <div class="flex items-center p-3 mb-3.5 rounded-lg border border-gray-200">
+                  <div class="w-10 h-10 flex justify-center items-center mr-3 bg-blue-100 rounded-lg">
                     <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                       <path clip-rule="evenodd" fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625zM7.5 15a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 017.5 15zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H8.25z"></path>
                       <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z"></path>
@@ -360,7 +363,7 @@
                     <p class="text-sm font-semibold text-gray-900">flowbite_offer_345"</p>
                     <p class="text-sm text-gray-500">PDF, 2.3 MB</p>
                   </div>
-                  <div class="flex items-center ml-auto">
+                  <div class="ml-auto flex items-center">
                     <button type="button" class="p-2 rounded hover:bg-gray-100">
                       <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z"></path>
@@ -376,8 +379,8 @@
                   </div>
                 </div>
                 <!-- Item -->
-                <div class="flex items-center p-3 mb-3.5 border border-gray-200 rounded-lg">
-                  <div class="flex items-center justify-center w-10 h-10 mr-3 bg-teal-100 rounded-lg">
+                <div class="flex items-center p-3 mb-3.5 rounded-lg border border-gray-200">
+                  <div class="w-10 h-10 flex justify-center items-center mr-3 bg-teal-100 rounded-lg">
                     <svg class="w-5 h-5 text-teal-600 lg:w-6 lg:h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                       <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
                     </svg>
@@ -386,7 +389,7 @@
                     <p class="text-sm font-semibold text-gray-900">bergside_pitch"</p>
                     <p class="text-sm text-gray-500">PPTX, 10.1 MB</p>
                   </div>
-                  <div class="flex items-center ml-auto">
+                  <div class="ml-auto flex items-center">
                     <button type="button" class="p-2 rounded hover:bg-gray-100">
                       <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z"></path>
@@ -404,19 +407,19 @@
               </div>
             </article>
             <article class="pl-12 mb-5">
-              <footer class="flex items-center justify-between mb-2">
+              <footer class="flex justify-between items-center mb-2">
                 <div class="flex items-center">
                   <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="Joseph avatar">Joseph McFallen</p>
                   <p class="text-sm text-gray-600"><time pubdate="" datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023 4:15 PM</time></p>
                 </div>
-                <button id="dropdownComment4Button" data-dropdown-toggle="dropdownComment4" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+                <button id="dropdownComment4Button" data-dropdown-toggle="dropdownComment4" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-50 hover:bg-gray-100" type="button">
                   <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
                   </svg>
                   <span class="sr-only">Comment settings</span>
                 </button>
                 <!-- Dropdown menu -->
-                <div id="dropdownComment4" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-36" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(844.5px, 703px, 0px);" data-popper-placement="top" data-popper-reference-hidden="" data-popper-escaped="">
+                <div id="dropdownComment4" class="w-36 z-10 hidden bg-white rounded divide-y divide-gray-100 shadow" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(844.5px, 703px, 0px);" data-popper-placement="top" data-popper-reference-hidden="" data-popper-escaped="">
                   <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownMenuIconHorizontalButton">
                     <li>
                       <a href="#" class="block px-4 py-2 hover:bg-gray-100">Edit</a>
@@ -431,23 +434,23 @@
                 </div>
               </footer>
               <p class="mb-2 text-gray-900">
-                Hello <a href="#" class="font-medium hover:underline text-blue-600">@jeseleos</a> I need some informations about flowbite react version.
+                Hello <a href="#" class="font-medium text-blue-600 hover:underline">@jeseleos</a> I need some informations about flowbite react version.
               </p>
             </article>
             <article class="pl-12 mb-5">
-              <footer class="flex items-center justify-between mb-2">
+              <footer class="flex justify-between items-center mb-2">
                 <div class="flex items-center">
                   <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900"><img class="w-6 h-6 mr-2 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="Jese avatar">Jese Leos</p>
                   <p class="text-sm text-gray-600"><time pubdate="" datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023 4:15 PM</time></p>
                 </div>
-                <button id="dropdownComment5Button" data-dropdown-toggle="dropdownComment5" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+                <button id="dropdownComment5Button" data-dropdown-toggle="dropdownComment5" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-50 hover:bg-gray-100" type="button">
                   <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
                   </svg>
                   <span class="sr-only">Comment settings</span>
                 </button>
                 <!-- Dropdown menu -->
-                <div id="dropdownComment5" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-36" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(844.5px, 815px, 0px);" data-popper-placement="top" data-popper-reference-hidden="" data-popper-escaped="">
+                <div id="dropdownComment5" class="w-36 z-10 hidden bg-white rounded divide-y divide-gray-100 shadow" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(844.5px, 815px, 0px);" data-popper-placement="top" data-popper-reference-hidden="" data-popper-escaped="">
                   <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownMenuIconHorizontalButton">
                     <li>
                       <a href="#" class="block px-4 py-2 hover:bg-gray-100">Edit</a>
@@ -462,13 +465,13 @@
                 </div>
               </footer>
               <p class="mb-4 text-gray-900">
-                Hi <a href="#" class="font-medium hover:underline text-blue-600">@josephh</a> Sure, just let me know whean you are available and we can speak.
+                Hi <a href="#" class="font-medium text-blue-600 hover:underline">@josephh</a> Sure, just let me know whean you are available and we can speak.
               </p>
 
               <label for="chat" class="sr-only">Your message</label>
               <div class="flex items-center mb-5">
-                <textarea id="chat" rows="1" class="block mr-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Reply in thread..."></textarea>
-                <button type="submit" class="inline-flex justify-center p-2 rounded-lg cursor-pointer text-blue-600 hover:bg-blue-100">
+                <textarea id="chat" rows="1" class="w-full block p-2.5 mr-4 text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-blue-500" placeholder="Reply in thread..."></textarea>
+                <button type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-lg cursor-pointer hover:bg-blue-100">
                   <svg aria-hidden="true" class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
                   </svg>
@@ -476,7 +479,7 @@
                 </button>
               </div>
 
-              <span class="inline-flex items-center text-xs font-medium cursor-pointer hover:underline text-blue-700 sm:text-sm">
+              <span class="inline-flex items-center text-xs font-medium text-blue-700 cursor-pointer hover:underline sm:text-sm">
                 Hide thread
                 <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path clip-rule="evenodd" fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"></path>
@@ -484,13 +487,13 @@
               </span>
             </article>
           </form>
-          <div class="w-full border border-gray-200 rounded-lg bg-gray-50">
+          <div class="w-full bg-gray-50 rounded-lg border border-gray-200">
             <div class="px-4 py-2 bg-white rounded-t-lg">
               <label for="comment" class="sr-only">Write your message</label>
               <textarea id="comment" rows="8" class="w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-0" placeholder="Write your message" required=""></textarea>
             </div>
-            <div class="flex items-center justify-between px-3 py-2 border-t">
-              <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
+            <div class="flex justify-between items-center px-3 py-2 border-t">
+              <button type="submit" class="inline-flex items-center px-4 py-2.5 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
                 Send message
               </button>
               <div class="flex pl-0 space-x-1 sm:pl-2">
@@ -517,8 +520,8 @@
           </div>
         </div>
         <div class="grid gap-4">
-            <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6">
-                <div class="items-center justify-between pb-4 border-b border-gray-200 sm:flex">
+            <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6">
+                <div class="justify-between items-center pb-4 border-b border-gray-200 sm:flex">
                   <div class="w-full mb-4 sm:mb-0">
                     <h3 class="text-base font-normal text-gray-500">Sales by category</h3>
                     <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl">Desktop PC</span>
@@ -533,7 +536,7 @@
                     </p>
                   </div>
                   <div class="w-full max-w-lg">
-                    <div date-rangepicker="" class="grid items-center grid-cols-2 gap-4">
+                    <div date-rangepicker="" class="grid grid-cols-2 items-center gap-4">
                       <div class="relative">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                           <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -541,7 +544,7 @@
                             <path clip-rule="evenodd" fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
                           </svg>
                         </div>
-                        <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 datepicker-input" placeholder="From">
+                        <input name="start" type="text" class="datepicker-input w-full block p-2.5 pl-10 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-blue-500" placeholder="From">
                       </div>
                       <div class="relative">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -550,19 +553,19 @@
                             <path clip-rule="evenodd" fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
                           </svg>
                         </div>
-                        <input name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 datepicker-input" placeholder="To">
+                        <input name="end" type="text" class="datepicker-input w-full block p-2.5 pl-10 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-blue-500" placeholder="To">
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="w-full min-h-[435px]" id="sales-by-category"></div>
-                <div class="flex items-center justify-between pt-3 mt-4 border-t border-gray-200 sm:pt-6">
+                <div class="min-h-[435px] w-full" id="sales-by-category"></div>
+                <div class="flex justify-between items-center pt-3 mt-4 border-t border-gray-200 sm:pt-6">
                   <div>
                     <button class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900" type="button" data-dropdown-toggle="sales-by-category-dropdown">Last 7 days <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                       </svg></button>
                     <!-- Dropdown menu -->
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow" id="sales-by-category-dropdown" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(997.5px, 1607px, 0px);" data-popper-placement="bottom">
+                    <div class="z-50 hidden my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow" id="sales-by-category-dropdown" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(997.5px, 1607px, 0px);" data-popper-placement="bottom">
                       <div class="px-4 py-3" role="none">
                         <p class="text-sm font-medium text-gray-900 truncate" role="none">
                           Sep 16, 2021 - Sep 22, 2021
@@ -591,7 +594,7 @@
                     </div>
                   </div>
                   <div class="flex-shrink-0">
-                    <a href="#" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-blue-700 sm:text-sm hover:bg-gray-100">
+                    <a href="#" class="inline-flex items-center p-2 text-xs font-medium text-blue-700 uppercase rounded-lg hover:bg-gray-100 sm:text-sm">
                       Sales Report
                       <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -600,13 +603,13 @@
                   </div>
                 </div>
             </div>
-            <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6">
-                <div class="flex items-center justify-between pb-4 mb-4 border-b border-gray-200">
+            <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6">
+                <div class="flex justify-between items-center pb-4 mb-4 border-b border-gray-200">
                   <div>
                     <h3 class="text-base font-normal text-gray-500">Traffic by device</h3>
                     <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl">Desktop</span>
                   </div>
-                  <a href="#" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-blue-700 sm:text-sm hover:bg-gray-100">
+                  <a href="#" class="inline-flex items-center p-2 text-xs font-medium text-blue-700 uppercase rounded-lg hover:bg-gray-100 sm:text-sm">
                     Full report
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -614,7 +617,7 @@
                   </a>
                 </div>
                 <div id="traffic-by-device" class="min-h-[378.7px]"></div>
-                <div class="flex items-center justify-between pt-4 lg:justify-evenly sm:pt-6">
+                <div class="flex justify-between items-center pt-4 lg:justify-evenly sm:pt-6">
                   <div>
                     <svg class="w-8 h-8 mb-1 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                       <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15h-3.105a3.501 3.501 0 001.1 1.677A.75.75 0 0113.26 18H6.74a.75.75 0 01-.484-1.323A3.501 3.501 0 007.355 15H4.25A2.25 2.25 0 012 12.75v-8.5zm1.5 0a.75.75 0 01.75-.75h11.5a.75.75 0 01.75.75v7.5a.75.75 0 01-.75.75H4.25a.75.75 0 01-.75-.75v-7.5z"></path>
@@ -677,29 +680,29 @@
     </div>
     <div class="grid grid-cols-1 my-4 xl:grid-cols-2 xl:gap-4">
       <!-- Activity Card -->
-      <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 xl:mb-0">
-        <div class="flex items-center justify-between mb-4">
+      <div class="p-4 mb-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6 xl:mb-0">
+        <div class="flex justify-between items-center mb-4">
           <h3 class="text-lg font-semibold text-gray-900">Latest Activity</h3>
-          <a href="#" class="inline-flex items-center p-2 text-sm font-medium rounded-lg text-primary-700 hover:bg-gray-100">
+          <a href="#" class="text-primary-700 inline-flex items-center p-2 text-sm font-medium rounded-lg hover:bg-gray-100">
             View all
           </a>
         </div>
         <ol class="relative border-l border-gray-200">
           <li class="mb-10 ml-4">
-            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+            <div class="-left-1.5 w-3 h-3 absolute mt-1.5 bg-gray-200 rounded-full border border-white"></div>
             <time class="mb-1 text-sm font-normal leading-none text-gray-400">April 2023</time>
             <h3 class="text-lg font-semibold text-gray-900">Application UI design in Figma</h3>
             <p class="mb-4 text-base font-normal text-gray-500">Get access to over 20+ pages including a dashboard layout, charts, kanban board, calendar, and pre-order E-commerce &amp; Marketing pages.</p>
-            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-primary-700">Learn more <svg class="w-3 h-3 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 focus:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 hover:text-primary-700 hover:bg-gray-100">Learn more <svg class="w-3 h-3 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
               </svg></a>
           </li>
           <li class="mb-10 ml-4">
-            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+            <div class="-left-1.5 w-3 h-3 absolute mt-1.5 bg-gray-200 rounded-full border border-white"></div>
             <time class="mb-1 text-sm font-normal leading-none text-gray-400">March 2023</time>
             <h3 class="text-lg font-semibold text-gray-900">Marketing UI code in Flowbite</h3>
             <p class="mb-4 text-base font-normal text-gray-500">Get started with dozens of web components and interactive elements built on top of Tailwind CSS.</p>
-            <a href="https://flowbite.com/blocks/" class="inline-flex items-center text-xs font-medium hover:underline text-primary-700 sm:text-sm">
+            <a href="https://flowbite.com/blocks/" class="text-primary-700 inline-flex items-center text-xs font-medium hover:underline sm:text-sm">
               Go to Flowbite Blocks
               <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -707,7 +710,7 @@
             </a>
           </li>
           <li class="mb-10 ml-4">
-            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+            <div class="-left-1.5 w-3 h-3 absolute mt-1.5 bg-gray-200 rounded-full border border-white"></div>
             <time class="mb-1 text-sm font-normal leading-none text-gray-400">February 2023</time>
             <h3 class="text-lg font-semibold text-gray-900">Marketing UI design in Figma</h3>
             <p class="text-base font-normal text-gray-500">Get started with dozens of web components and interactive elements built on top of Tailwind CSS.</p>
@@ -715,11 +718,11 @@
         </ol>
       </div>
       <!--Carousel widget -->
-      <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 z-0">
-        <div id="carousel" class="relative h-full" data-carousel="">
-          <div class="relative mx-auto overflow-hidden h-[36rem] lg:h-[24rem]">
-            <div class="duration-700 ease-in-out bg-white absolute inset-0 transition-transform transform -translate-x-full z-10" data-carousel-item="">
-              <div class="flex items-center mb-4 text-lg font-medium text-primary-600">
+      <div class="z-0 p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6">
+        <div id="carousel" class="h-full relative" data-carousel="">
+          <div class="h-[36rem] mx-auto overflow-hidden relative lg:h-[24rem]">
+            <div class="-translate-x-full transform absolute inset-0 z-10 bg-white transition-transform duration-700 ease-in-out" data-carousel-item="">
+              <div class="text-primary-600 flex items-center mb-4 text-lg font-medium">
                 <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path clip-rule="evenodd" fill-rule="evenodd" d="M9.664 1.319a.75.75 0 01.672 0 41.059 41.059 0 018.198 5.424.75.75 0 01-.254 1.285 31.372 31.372 0 00-7.86 3.83.75.75 0 01-.84 0 31.508 31.508 0 00-2.08-1.287V9.394c0-.244.116-.463.302-.592a35.504 35.504 0 013.305-2.033.75.75 0 00-.714-1.319 37 37 0 00-3.446 2.12A2.216 2.216 0 006 9.393v.38a31.293 31.293 0 00-4.28-1.746.75.75 0 01-.254-1.285 41.059 41.059 0 018.198-5.424zM6 11.459a29.848 29.848 0 00-2.455-1.158 41.029 41.029 0 00-.39 3.114.75.75 0 00.419.74c.528.256 1.046.53 1.554.82-.21.324-.455.63-.739.914a.75.75 0 101.06 1.06c.37-.369.69-.77.96-1.193a26.61 26.61 0 013.095 2.348.75.75 0 00.992 0 26.547 26.547 0 015.93-3.95.75.75 0 00.42-.739 41.053 41.053 0 00-.39-3.114 29.925 29.925 0 00-5.199 2.801 2.25 2.25 0 01-2.514 0c-.41-.275-.826-.541-1.25-.797a6.985 6.985 0 01-1.084 3.45 26.503 26.503 0 00-1.281-.78A5.487 5.487 0 006 12v-.54z"></path>
                 </svg>
@@ -728,20 +731,20 @@
               <h3 class="mb-4 text-2xl font-medium text-gray-900">You are going to grow by 44% next year</h3>
               <p class="mb-4 text-gray-500">Get started with a free and open-source admin dashboard layout built with Tailwind CSS and Flowbite featuring charts, widgets, CRUD layouts, authentication pages, and more</p>
               <p class="mb-2 text-lg font-medium text-gray-900">Key Takeaways:</p>
-              <ul class="pl-4 mb-4 space-y-3 text-gray-500 list-disc">
+              <ul class="pl-4 mb-4 space-y-3 list-disc text-gray-500">
                 <li>What are the new challenges in the delivery industry due to new consumer expectations.</li>
                 <li>How the online delivery business model is diversifying to meet new demands.</li>
                 <li>Which new technology requirements must be met to ensure true retail experiences.</li>
                 <li>How a headless commerce architecture solves challenges in the industry.</li>
               </ul>
-              <a href="#" class="inline-flex items-center p-2 font-medium rounded-lg text-primary-700 hover:bg-gray-100">
+              <a href="#" class="text-primary-700 inline-flex items-center p-2 font-medium rounded-lg hover:bg-gray-100">
                 Get me there
                 <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path clip-rule="evenodd" fill-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z"></path>
                 </svg>
               </a>
             </div>
-            <div class="duration-700 ease-in-out bg-white absolute inset-0 transition-transform transform translate-x-0 z-20" data-carousel-item="">
+            <div class="transform absolute inset-0 z-20 bg-white transition-transform duration-700 ease-in-out translate-x-0" data-carousel-item="">
               <div class="flex items-center mb-4 text-lg font-medium text-teal-500">
                 <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path clip-rule="evenodd" fill-rule="evenodd" d="M4.606 12.97a.75.75 0 01-.134 1.051 2.494 2.494 0 00-.93 2.437 2.494 2.494 0 002.437-.93.75.75 0 111.186.918 3.995 3.995 0 01-4.482 1.332.75.75 0 01-.461-.461 3.994 3.994 0 011.332-4.482.75.75 0 011.052.134z"></path>
@@ -751,7 +754,7 @@
               </div>
               <p class="mb-4 text-gray-500">Marketing, sales &amp; business growth for small business. Improve your marketing &amp; promotion results - and grow your sales!</p>
               <p class="mb-4 text-lg font-medium text-gray-900">What you'll learn:</p>
-              <ul role="list" class="pl-2 mb-4 space-y-3 text-gray-500 list-disc">
+              <ul role="list" class="pl-2 mb-4 space-y-3 list-disc text-gray-500">
                 <li class="flex space-x-2">
                   <!-- Icon -->
                   <svg class="flex-shrink-0 w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -795,14 +798,14 @@
                   <span class="leading-tight">Make their customers feel loved and apprecaited</span>
                 </li>
               </ul>
-              <a href="#" class="inline-flex items-center p-2 font-medium rounded-lg text-primary-700 hover:bg-gray-100">
+              <a href="#" class="text-primary-700 inline-flex items-center p-2 font-medium rounded-lg hover:bg-gray-100">
                 Let's start
                 <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path clip-rule="evenodd" fill-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z"></path>
                 </svg>
               </a>
             </div>
-            <div class="duration-700 ease-in-out bg-white absolute inset-0 transition-transform transform z-10 translate-x-full" data-carousel-item="">
+            <div class="transform absolute inset-0 z-10 bg-white transition-transform duration-700 ease-in-out translate-x-full" data-carousel-item="">
               <div class="flex items-center mb-4 text-lg font-medium text-purple-600">
                 <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path clip-rule="evenodd" fill-rule="evenodd" d="M13.5 4.938a7 7 0 11-9.006 1.737c.202-.257.59-.218.793.039.278.352.594.672.943.954.332.269.786-.049.773-.476a5.977 5.977 0 01.572-2.759 6.026 6.026 0 012.486-2.665c.247-.14.55-.016.677.238A6.967 6.967 0 0013.5 4.938zM14 12a4 4 0 01-4 4c-1.913 0-3.52-1.398-3.91-3.182-.093-.429.44-.643.814-.413a4.043 4.043 0 001.601.564c.303.038.531-.24.51-.544a5.975 5.975 0 011.315-4.192.447.447 0 01.431-.16A4.001 4.001 0 0114 12z"></path>
@@ -812,7 +815,7 @@
               <h3 class="mb-4 text-2xl font-medium text-gray-900">Go next level with Flowbite</h3>
               <p class="text-gray-500">Deliver great service experiences fast - without the complexity of traditional ITSM solutions.Accelerate critical development work, eliminate toil, and deploy changes with ease.</p>
               <!-- List -->
-              <ul role="list" class="pl-2 my-5 mb-4 space-y-3 text-gray-500 list-disc">
+              <ul role="list" class="pl-2 my-5 mb-4 space-y-3 list-disc text-gray-500">
                 <li class="flex space-x-3">
                   <!-- Icon -->
                   <svg class="flex-shrink-0 w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -842,7 +845,7 @@
                   <span class="leading-tight">Limitless business automation</span>
                 </li>
               </ul>
-              <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200">
+              <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 hover:text-primary-700 hover:bg-gray-100">
                 View more
                 <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path clip-rule="evenodd" fill-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z"></path>
@@ -850,8 +853,8 @@
               </button>
             </div>
           </div>
-          <div class="flex items-center justify-center absolute bottom-0 w-full">
-            <button type="button" class="flex items-center justify-center h-full mr-4 cursor-pointer group focus:outline-none" data-carousel-prev="">
+          <div class="w-full absolute bottom-0 flex justify-center items-center">
+            <button type="button" class="h-full flex justify-center items-center mr-4 cursor-pointer group focus:outline-none" data-carousel-prev="">
               <span class="text-gray-500 hover:text-gray-700">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
@@ -859,7 +862,7 @@
                 <span class="hidden">Previous</span>
               </span>
             </button>
-            <button type="button" class="flex items-center justify-center h-full cursor-pointer group focus:outline-none" data-carousel-next="">
+            <button type="button" class="h-full flex justify-center items-center cursor-pointer group focus:outline-none" data-carousel-next="">
               <span class="text-gray-500 hover:text-gray-700">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -871,29 +874,29 @@
         </div>
       </div>
     </div>
-    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6">
+    <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6">
       <!-- Card header -->
-      <div class="items-center justify-between lg:flex">
+      <div class="justify-between items-center lg:flex">
         <div class="mb-4 lg:mb-0">
           <h3 class="mb-2 text-xl font-bold text-gray-900">Historial</h3>
           <span class="text-base font-normal text-gray-500">Tomas en tiempo real</span>
         </div>
         <div class="items-center sm:flex">
           <div class="flex items-center">
-            <button id="dropdownDefault" data-dropdown-toggle="dropdown" class="mb-4 sm:mb-0 mr-4 inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5" type="button">
+            <button id="dropdownDefault" data-dropdown-toggle="dropdown" class="inline-flex items-center px-4 py-2.5 mr-4 mb-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 sm:mb-0" type="button">
               Filter by status
               <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
             <!-- Dropdown menu -->
-            <div id="dropdown" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(986.5px, 3101.5px, 0px);" data-popper-placement="bottom">
+            <div id="dropdown" class="w-56 z-10 hidden p-3 bg-white rounded-lg shadow" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(986.5px, 3101.5px, 0px);" data-popper-placement="bottom">
               <h6 class="mb-3 text-sm font-medium text-gray-900">
                 Category
               </h6>
               <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
                 <li class="flex items-center">
-                  <input id="apple" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2">
+                  <input id="apple" type="checkbox" value="" class="text-primary-600 w-4 h-4 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 focus:ring-2">
 
                   <label for="apple" class="ml-2 text-sm font-medium text-gray-900">
                     Completed (56)
@@ -901,7 +904,7 @@
                 </li>
 
                 <li class="flex items-center">
-                  <input id="fitbit" type="checkbox" value="" checked="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2">
+                  <input id="fitbit" type="checkbox" value="" checked="" class="text-primary-600 w-4 h-4 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 focus:ring-2">
 
                   <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900">
                     Cancelled (56)
@@ -909,7 +912,7 @@
                 </li>
 
                 <li class="flex items-center">
-                  <input id="dell" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2">
+                  <input id="dell" type="checkbox" value="" class="text-primary-600 w-4 h-4 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 focus:ring-2">
 
                   <label for="dell" class="ml-2 text-sm font-medium text-gray-900">
                     In progress (56)
@@ -917,7 +920,7 @@
                 </li>
 
                 <li class="flex items-center">
-                  <input id="asus" type="checkbox" value="" checked="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2">
+                  <input id="asus" type="checkbox" value="" checked="" class="text-primary-600 w-4 h-4 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 focus:ring-2">
 
                   <label for="asus" class="ml-2 text-sm font-medium text-gray-900">
                     In review (97)
@@ -934,7 +937,7 @@
                   <path clip-rule="evenodd" fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
                 </svg>
               </div>
-              <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 datepicker-input" placeholder="From">
+              <input name="start" type="text" class="datepicker-input w-full block p-2.5 pl-10 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="From">
             </div>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -943,7 +946,7 @@
                   <path clip-rule="evenodd" fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
                 </svg>
               </div>
-              <input name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 datepicker-input" placeholder="To">
+              <input name="end" type="text" class="datepicker-input w-full block p-2.5 pl-10 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="To">
             </div>
           </div> --}}
         </div>
@@ -951,7 +954,7 @@
       <!-- Table -->
       {{-- <div class="flex flex-col mt-6">
         <div class="overflow-x-auto rounded-lg">
-          <div class="inline-block min-w-full align-middle">
+          <div class="min-w-full inline-block align-middle">
             <div class="overflow-hidden shadow sm:rounded-lg">
               <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
@@ -1005,11 +1008,11 @@
       </div> --}}
       <div class="flex flex-col mt-6">
         <div class="overflow-x-auto rounded-lg">
-          <div class="inline-block min-w-full align-middle">
+          <div class="min-w-full inline-block align-middle">
             <div class="overflow-hidden shadow sm:rounded-lg" style="max-height: 50vh;">
               <div class="overflow-y-auto" style="max-height: 50vh;">
                 <table class="min-w-full divide-y divide-gray-200">
-                  <thead class="bg-gray-50 sticky top-0">
+                  <thead class="sticky top-0 bg-gray-50">
                     <tr>
                       <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                         Dispositivo
@@ -1041,13 +1044,13 @@
         </div>
       </div>
       <!-- Card Footer -->
-      <div class="flex items-center justify-between pt-3 sm:pt-6">
+      <div class="flex justify-between items-center pt-3 sm:pt-6">
         <div>
           <button class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900" type="button" data-dropdown-toggle="transactions-dropdown">Last 7 days <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg></button>
           <!-- Dropdown menu -->
-          <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow" id="transactions-dropdown" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(355px, 2736.5px, 0px);" data-popper-placement="top">
+          <div class="z-50 hidden my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow" id="transactions-dropdown" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(355px, 2736.5px, 0px);" data-popper-placement="top">
             <div class="px-4 py-3" role="none">
               <p class="text-sm font-medium text-gray-900 truncate" role="none">
                 Sep 16, 2021 - Sep 22, 2021
@@ -1076,7 +1079,7 @@
           </div>
         </div>
         <div class="flex-shrink-0">
-          <a href="#" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-primary-700 sm:text-sm hover:bg-gray-100">
+          <a href="#" class="text-primary-700 inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg hover:bg-gray-100 sm:text-sm">
             Transactions Report
             <svg class="w-4 h-4 ml-1 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -1085,7 +1088,7 @@
         </div>
       </div>
     </div>
-    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6">
+    <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6">
       <div id="globalPhData"></div>
       <div id="globalTemperaturaData"></div>
       <div id="globalOxigenoDisueltoData"></div>
@@ -1159,7 +1162,7 @@
     </style> --}}
 
   {{-- <section class="bg-white">
-        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+        <div class="mx-auto max-w-screen-xl grid px-4 py-8 lg:grid-cols-12 lg:gap-8 lg:py-16 xl:gap-0">
             <div class="mr-auto place-self-center lg:col-span-7">
                 <h1>ESP32 MQTT Data</h1>
                 <div class="data-container" id="data-container">
@@ -1175,13 +1178,13 @@
             </div>
         </div>
     </section> --}}
-  {{-- <div class="max-w-sm w-full bg-white rounded-lg shadow p-4 md:p-6 relative">
+  {{-- <div class="w-full max-w-sm relative p-4 bg-white rounded-lg shadow md:p-6">
     <div class="flex justify-between">
       <div>
-        <h5 class="leading-none text-3xl font-bold text-gray-900 pb-2">32.4k</h5>
+        <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900">32.4k</h5>
         <p class="text-base font-normal text-gray-500">Users this week</p>
       </div>
-      <div class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 text-center">
+      <div class="flex items-center px-2.5 py-0.5 text-base font-semibold text-center text-green-500">
         12%
         <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
@@ -1189,17 +1192,17 @@
       </div>
     </div>
     <div id="area-chart"></div>
-    <div class="grid grid-cols-1 items-center border-gray-200 border-t justify-between">
+    <div class="grid grid-cols-1 justify-between items-center border-t border-gray-200">
       <div class="flex justify-between items-center pt-5">
         <!-- Button -->
-        <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom" class="text-sm font-medium text-gray-500 hover:text-gray-900 text-center inline-flex items-center" type="button">
+        <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom" class="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900" type="button">
           Last 7 days
           <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
           </svg>
         </button>
         <!-- Dropdown menu -->
-        <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+        <div id="lastDaysdropdown" class="w-44 z-10 hidden bg-white rounded-lg divide-y divide-gray-100 shadow">
           <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
             <li>
               <a href="#" class="block px-4 py-2 hover:bg-gray-100">Yesterday</a>
@@ -1218,7 +1221,7 @@
             </li>
           </ul>
         </div>
-        <a href="#" class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700  hover:bg-gray-100 px-3 py-2">
+        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-semibold text-blue-600 uppercase rounded-lg hover:text-blue-700 hover:bg-gray-100">
           Users Report
           <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
