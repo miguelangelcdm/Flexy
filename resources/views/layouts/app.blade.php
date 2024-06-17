@@ -18,12 +18,12 @@
 <body class="font-sans antialiased">
     {{--
     <x-banner /> --}}
-    <div class="min-h-screen bg-[#f6f5f2] dark:bg-gray-900">
+    <div class="bg-[#f6f5f2] min-h-screen dark:bg-gray-900">
         <x-navbar />
         <x-sidebar />
 
         <div class="p-4 sm:ml-64">
-            <div class="p-4 border-gray-200 rounded-lg dark:border-gray-700 mt-14">
+            <div class="p-4 mt-14 rounded-lg border-gray-200 dark:border-gray-700">
                 {{ $slot }}
             </div>
         </div>
@@ -63,7 +63,7 @@
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="mx-auto max-w-7xl px-4 py-6 lg:px-8 sm:px-6">
                         {{ $header }}
                     </div>
                 </header>
