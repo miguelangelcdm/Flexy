@@ -10,8 +10,7 @@ let globalOxigenoDisueltoData = [];
 let globalConductividadData = [];
 
 function fetchData() {
-    //return 
-    axios.get('/data/getAll')
+    return axios.get('/data/getAll')
         .then(function (response) {
             console.log('Datos recibidos:', response.data);
             // Almacenar los datos globalmente
@@ -30,10 +29,15 @@ function fetchData() {
 // Ejemplo de uso de los datos globales en otra función
 function processData() {
     // Aquí puedes acceder a los datos globales
-    console.log('pH data:', globalPhData);
-    console.log('Temperatura data:', globalTemperaturaData);
-    console.log('Oxígeno Disuelto data:', globalOxigenoDisueltoData);
-    console.log('Conductividad data:', globalConductividadData);
+    // console.log('pH data:', globalPhData);
+    // console.log('Temperatura data:', globalTemperaturaData);
+    // console.log('Oxígeno Disuelto data:', globalOxigenoDisueltoData);
+    // console.log('Conductividad data:', globalConductividadData);
+    document.getElementById('globalPhData').innerText = globalPhData.join(', ');
+    document.getElementById('globalTemperaturaData').innerText = globalTemperaturaData.join(', ');
+    document.getElementById('globalOxigenoDisueltoData').innerText = globalOxigenoDisueltoData.join(', ');
+    document.getElementById('globalConductividadData').innerText = globalConductividadData.join(', ');
+
 
     // Realiza el procesamiento que necesites con los datos
     // Por ejemplo, calcular el promedio del pH
@@ -42,9 +46,9 @@ function processData() {
 }
 
 // Llamar a fetchData y luego procesar los datos
-// fetchData().then(() => {
-//     processData();
-// });
+fetchData().then(() => {
+    processData();
+});
 
 
 // Conexión al broker MQTT
@@ -74,7 +78,10 @@ client.on('message',async  function (topic, message) {
         oxigeno_disuelto: data.Data.OxigenoDisuelto
     })
     .then(function (response) {
-    console.log(response);
+        console.log(response);
+        fetchData().then(() => {
+            processData();
+        });
     })
     .catch(function (error) {
     console.log(error);
@@ -103,7 +110,7 @@ client.on('message',async  function (topic, message) {
     } else {
         overflowDiv.style.overflowY = "hidden";
     }
-    fetchData();
-    processData();
+
+    
 
 });

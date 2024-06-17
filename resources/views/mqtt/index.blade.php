@@ -1085,6 +1085,13 @@
         </div>
       </div>
     </div>
+    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6">
+      <div id="globalPhData"></div>
+      <div id="globalTemperaturaData"></div>
+      <div id="globalOxigenoDisueltoData"></div>
+      <div id="globalConductividadData"></div>
+    </div>
+
   </div>
   {{-- <script>
     // Simulación de la llegada de datos cada 5 segundos
