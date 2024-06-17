@@ -47,7 +47,7 @@ class ServiceController extends Controller
                 
             ]);
         }
-        
+
         //return $observedValues['ph'].' minimo'.$this->expectedValues['min']['ph'].' maximo'.$this->expectedValues['max']['ph'];
 
         // Verificar oxigeno_disuelto (Oxígeno disuelto)
