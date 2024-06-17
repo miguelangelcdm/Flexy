@@ -10,6 +10,7 @@ let globalPhData = [];
 let globalTemperaturaData = [];
 let globalOxigenoDisueltoData = [];
 let globalConductividadData = [];
+let globalTimestamps = [];
 let chartPh;
 
 // Function to initialize the MQTT client
@@ -104,6 +105,7 @@ async function fetchData() {
         globalTemperaturaData = response.data.temperatura;
         globalOxigenoDisueltoData = response.data.oxigenoDisuelto;
         globalConductividadData = response.data.conductividad;
+        globalTimestamps=response.data.created_at;
     } catch (error) {
         console.error("Error al obtener los datos:", error);
         throw error; // Relanza el error para poder capturarlo más adelante si es necesario.

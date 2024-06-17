@@ -34,7 +34,7 @@ class DataController extends Controller
 
     public function getAll() 
     {
-        $data = Data::select('ph', 'temperatura', 'oxigeno_disuelto', 'conductividad')->orderBy('created_at')->get()->take(-10);
+        $data = Data::select('ph', 'temperatura', 'oxigeno_disuelto', 'conductividad','created_at')->orderBy('created_at')->get()->take(-10);
 
         $array = [
             'ph' => $data->pluck('ph')->all(),
@@ -42,6 +42,9 @@ class DataController extends Controller
             'oxigenoDisuelto' => $data->pluck('oxigeno_disuelto')->all(),
             'conductividad' => $data->pluck('conductividad')->all(),
             'expextedValues'=>$this->expectedValues,
+            'created_at' => $data->pluck('created_at')->map(function($date) {
+                return $date->format('Y-m-d H:i:s');
+            })->all(),
         ];
     
         $jsonData = json_encode($array);
