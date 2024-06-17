@@ -845,7 +845,6 @@ client.on('message',async  function (topic, message) {
     axios.post('/data/save', {
         dispositivo: data.Dispositivo,
         id: data.Id,
-        timestamp: data.Timestamp,
         ph: data.Data.Ph,
         temperatura: data.Data.Temperatura,
         conductividad: data.Data.Conductividad,
